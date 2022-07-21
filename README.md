@@ -23,9 +23,9 @@ npm i @mcistudio/vue-colorpicker
 ### How to Use
 
 #### Global Registration
+main.js
+```javascript
 
-```vue3
-// main.js
 import ColorPicker from '@mcistudio/vue-colorpicker'
 import '@mcistudio/vue-colorpicker/style.css'
 createApp(App)
@@ -36,24 +36,22 @@ createApp(App)
 ##### OR
 
 #### Local Registration
-
-```vue3
-// HelloWorld.vue
+HelloWorld.vue
+```vue
 <script setup>
 import ColorPicker from '@mcistudio/vue-colorpicker'
 import '@mcistudio/vue-colorpicker/dist/style.css'
 
 <template>
-	<ColorPicker></ColorPicker>
+  <ColorPicker></ColorPicker>
 </template>
 
 </script>
 ```
 
 #### demo
-
-```vue3
-// HelloWorld.vue
+HelloWorld.vue
+```vue
 <template>
   <ColorPicker mode="mode" :degree="degree" :gradients="grad" @colorChanged="triggerChanged" />
 </template>
