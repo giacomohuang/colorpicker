@@ -11,8 +11,7 @@ English | [中文](README.zh_CN.md)
 - Supports realtime preview.
 - Standard CSS export.
 
-<video>
-	<source src="public/demo.mov" type="video/mp4" width="240">
+<video src="https://user-images.githubusercontent.com/20314549/180185437-259e668f-03ec-45ba-bb5a-bf7bd99973e2.mov" type="video/mp4">
 </video>
 
 ## Installation
