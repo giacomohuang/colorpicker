@@ -31,7 +31,7 @@
         </div>
       </div>
       <div class="huebar-wrapper">
-        <SvgIcon class="icon" name="dropper" @click="dropColor" style="cursor: pointer" :style="isDropperEnabled ? '' : 'opacity: 50%;cursor:default'"></SvgIcon>
+        <div class="dropper" @click="dropColor" style="cursor: pointer" :style="isDropperEnabled ? '' : 'opacity: 50%;cursor:default'"></div>
         <div class="bar-wrapper">
           <div class="hue-bar" ref="hueBarEl" @click.stop="getHuePickerPos" @mousedown.stop="bindDown($event, getHuePickerPos)">
             <div class="picker" ref="huePickerEl" style="top: -1px" @mousedown.stop="bindDown($event, getHuePickerPos)"></div>
@@ -51,8 +51,8 @@ export default { name: 'vue3-colorpicker' }
 </script>
 
 <script setup>
-import { ref, reactive, onMounted, nextTick, watch, onBeforeMount } from 'vue'
-import SvgIcon from './SvgIcon.vue'
+import { ref, reactive, onMounted, nextTick, watch } from 'vue'
+
 import Utils from '../assets/js/Color'
 import maskImgUrl from '../assets/img/optmask.png'
 
@@ -60,12 +60,19 @@ const props = defineProps({
   mode: {
     type: String,
     required: false,
-    default: 'linear',
+    default: 'solid',
   },
   degree: {
     type: Number,
     required: false,
     default: 90,
+  },
+  color: {
+    type: Object,
+    required: false,
+    default() {
+      return { r: 0, g: 0, b: 0, a: 1 }
+    },
   },
   gradients: {
     type: Object,
@@ -100,11 +107,20 @@ const previewBackground = ref('')
 const gradPreviewColor = ref('')
 const isDropperEnabled = ref(true)
 
-//props
-const paletteColor = reactive({ h: 50, s: 50, b: 50, a: 0.5 })
+const paletteColor = reactive(Utils.rgba2hsba(props.color))
+
 const degree = ref(props.degree)
 const activeMode = ref(props.mode)
-const gradColors = ref(null)
+
+let g = []
+const gradColors = ref(g)
+props.gradients.forEach((item, index) => {
+  g.push({ id: index, percent: item.percent, color: Utils.rgba2hsba(item.color) })
+})
+gradColors.value = g
+if (g.length > 0) {
+  gradColors.value[gradColors.value.length - 1].id
+}
 let isDragging = false
 let paletteWidth = 216
 let paletteHeight = 138
@@ -119,17 +135,6 @@ if ('EyeDropper' in window) {
   isDropperEnabled.value = false
   console.log('EyeDropper only supports Google Chrome version 95 and above')
 }
-
-onBeforeMount(() => {
-  let g = []
-  props.gradients.forEach((item, index) => {
-    g.push({ id: index, percent: item.percent, color: Utils.rgba2hsba(item.color) })
-  })
-  gradColors.value = g
-  if (g.length > 0) {
-    gradColors.value[gradColors.value.length - 1].id
-  }
-})
 
 onMounted(() => {
   changeMode(activeMode.value)
@@ -559,12 +564,12 @@ function setPickerPos() {
     box-shadow: 0 0 0 1px #979797, 0 0 0 3px #f50, 0 0 0 4px #979797;
   }
 }
-.icon {
-  width: 1.5em;
-  height: 1.5em;
-  overflow: hidden;
+.dropper {
+  width: 25px;
+  height: 30px;
+  background: url('../assets/img/dropper@2x.png') center center no-repeat;
+  background-size: 25px;
 }
-
 .grad-wrapper {
   display: flex;
   flex-direction: row;
