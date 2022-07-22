@@ -332,24 +332,30 @@ function updatePreviews() {
     gradStr += ',' + Utils.hsba2rgba(item.color) + ' ' + item.percent + '%'
     gradArr.push({ percent: item.percent, color: Utils.hsb2rgb(item.color) })
   })
-  if (activeMode.value === 'linear') {
-    gradPreviewColor.value = `linear-gradient(to right,${gradStr.slice(1)}),url('${maskImgUrl}')`
-    previewBackground.value = `linear-gradient(${degree.value}deg${gradStr}),url('${maskImgUrl}')`
-    gradStyleStr = `background-image:linear-gradient(${degree.value}deg${gradStr})`
-  } else if (activeMode.value === 'radial') {
-    gradPreviewColor.value = `linear-gradient(to right,${gradStr.slice(1)}),url('${maskImgUrl}')`
-    previewBackground.value = `radial-gradient(${gradStr.slice(1)}),url('${maskImgUrl}')`
-    gradStyleStr = `background-image:radial-gradient(${gradStr.slice(1)})`
-  }
-  const emitVal = {
-    mode: activeMode.value,
-    degree: activeMode.value === 'linear' ? degree.value : undefined,
-    solid: activeMode.value === 'solid' ? Utils.hsb2rgb(paletteColor) : null,
-    gradients: activeMode.value !== 'solid' ? gradArr : null,
-    solidStyle: activeMode.value === 'solid' ? `background-color:${Utils.hsba2rgba(paletteColor)}` : null,
-    gradientStyle: activeMode.value !== 'solid' ? gradStyleStr : null,
-  }
 
+  const emitVal = {}
+  emitVal.mode = activeMode.value
+  switch (activeMode.value) {
+    case 'solid':
+      emitVal.color = Utils.hsb2rgb(paletteColor)
+      emitVal.css = `background-color:${Utils.hsba2rgba(paletteColor)}`
+      break
+    case 'linear':
+      gradPreviewColor.value = `linear-gradient(to right,${gradStr.slice(1)}),url('${maskImgUrl}')`
+      previewBackground.value = `linear-gradient(${degree.value}deg${gradStr}),url('${maskImgUrl}')`
+      gradStyleStr = `background-image:linear-gradient(${degree.value}deg${gradStr})`
+      emitVal.degree = degree.value
+      emitVal.color = gradArr
+      emitVal.css = gradStyleStr
+      break
+    case 'radial':
+      gradPreviewColor.value = `linear-gradient(to right,${gradStr.slice(1)}),url('${maskImgUrl}')`
+      previewBackground.value = `radial-gradient(${gradStr.slice(1)}),url('${maskImgUrl}')`
+      gradStyleStr = `background-image:radial-gradient(${gradStr.slice(1)})`
+      emitVal.color = gradArr
+      emitVal.css = gradStyleStr
+      break
+  }
   emit('colorChanged', emitVal)
 }
 

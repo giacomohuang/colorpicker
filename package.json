@@ -1,7 +1,7 @@
 {
   "name": "@mcistudio/vue-colorpicker",
   "author": "Huang Jia <giacomohuang@qq.com>",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "keywords": [
     "vuejs",
     "vue",
@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "fast-glob": "^3.2.11",
-    "pinia": "^2.0.14",
     "vue": "^3.2.37",
     "vue-router": "^4.0.16"
   },
