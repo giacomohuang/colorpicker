@@ -77,7 +77,7 @@ function triggerChanged(color) {
 
 ### Props
 
-| Prop Name | Description                         | Type       | Accepted Values                         | Default Value                                                | Required |
+| Prop Name | Description                         | Type       | Accepted Value                         | Default Value                                                | Required |
 | --------- | ----------------------------------- | ---------- | --------------------------------------- | ------------------------------------------------------------ | -------- |
 | mode      | color mode                          | String     | solid<br />linear<br />radial<br /> | solid                                                        | No       |
 | degree    | drgee value in Linear-gradient mode | Number     | -                                       | 90                                                           | No       |
@@ -89,7 +89,7 @@ function triggerChanged(color) {
 
 | event Name   | Description | Parameters |
 | ------------ | ----------- | ---------- |
-| colorChanged |             | returnValue|
+| colorChanged | triggered when the color is changed | returnValue|
 
 ###### `returnValue` examples:
 
