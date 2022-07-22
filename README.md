@@ -77,13 +77,12 @@ function triggerChanged(color) {
 
 ### Props
 
-| Prop Name | Description                         | Type       | Accepted Values         | Default                                                      | Required |
-| --------- | ----------------------------------- | ---------- | ----------------------- | ------------------------------------------------------------ | -------- |
-| mode      | color mode                          | String     | solid / linear / radial | solid                                                        | No       |
-| degree    | drgee value in Linear-gradient mode | Number     | -                       | 90                                                           | No       |
-| color     | rgba color value in solid mode      | String     | -                       | { r: 0, g: 0, b: 0, a: 1 }                                   | No       |
-| gradients | gradient list<br />                 | JSON Array | -                       | [{ percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } }{ percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }] | No       |
-
+| Prop Name | Description                         | Type       | Accepted Values                         | Default Value                                                | Required |
+| --------- | ----------------------------------- | ---------- | --------------------------------------- | ------------------------------------------------------------ | -------- |
+| mode      | color mode                          | String     | solid<br />linear<br />radial<br /> | solid                                                        | No       |
+| degree    | drgee value in Linear-gradient mode | Number     | -                                       | 90                                                           | No       |
+| color     | rgba color value in solid mode      | String     | -                                       | { r: 0, g: 0, b: 0, a: 1 }                                   | No       |
+| gradients | gradient list<br />                 | JSON Array | -                                       | [<br />  { <br />    percent: 0, <br />    color: { r: 255, g: 255, b: 255, a: 1 }<br />   }<br />   { <br />    percent: 100, <br />    color: { r: 0, g: 0, b: 0, a: 1 <br />    } <br />  }<br />] | No       |
 
 
 ### Events
