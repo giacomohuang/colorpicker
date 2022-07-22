@@ -1,14 +1,21 @@
 {
   "name": "@mcistudio/vue-colorpicker",
   "author": "Huang Jia <giacomohuang@qq.com>",
-  "version": "1.0.6",
+  "version": "1.0.7",
+  "keywords": [
+    "vuejs",
+    "vue",
+    "colorpicker",
+    "vue3.0",
+    "vuejs3.0",
+    "vite"
+  ],
   "license": "MIT",
   "private": false,
   "module": "dist/colorpicker.es.js",
   "main": "dist/colorpicker.umd.js",
   "files": [
-    "dist",
-    "public"
+    "dist"
   ],
   "scripts": {
     "dev": "vite",
