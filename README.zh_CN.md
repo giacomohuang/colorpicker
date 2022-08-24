@@ -85,19 +85,19 @@ function triggerChanged(color) {
 
 ### Props 参数
 
-| Prop Name | Description                         | Type       | Accepted Value                         | Default Value                                                | Required |
+| 参数名 | 描述                         | 数据类型       | 允许值                        | 默认值                                               | 是否必填 |
 | --------- | ----------------------------------- | ---------- | --------------------------------------- | ------------------------------------------------------------ | -------- |
-| mode      | color mode                          | String     | solid<br />linear<br />radial<br /> | solid                                                        | No       |
-| degree    | drgee value in Linear-gradient mode | Number     | -                                       | 90                                                           | No       |
-| color     | rgba color value in solid mode      | String     | -                                       | { r: 0, g: 0, b: 0, a: 1 }                                   | No       |
-| gradients | gradient list<br />                 | JSON Array | -                                       | [<br />  { <br />    percent: 0, <br />    color: { r: 255, g: 255, b: 255, a: 1 }<br />   }<br />   { <br />    percent: 100, <br />    color: { r: 0, g: 0, b: 0, a: 1 <br />    } <br />  }<br />] | No       |
+| mode      | 模式                          | String     | solid<br />linear<br />radial<br /> | solid                                                        | No       |
+| degree    | 渐变色角度，仅在linear-gradient模式中生效 | Number     | -                                       | 90                                                           | No       |
+| color     | 色值(rgba格式)，仅在solid模式中生效      | String     | -                                       | { r: 0, g: 0, b: 0, a: 1 }                                   | No       |
+| gradients | 渐变色值列表，仅在linear-gradient和radial-gradient模式中生效<br />                 | JSON Array | -                                       | [<br />  { <br />    percent: 0, <br />    color: { r: 255, g: 255, b: 255, a: 1 }<br />   }<br />   { <br />    percent: 100, <br />    color: { r: 0, g: 0, b: 0, a: 1 <br />    } <br />  }<br />] | No       |
 
 
 ### Events 事件
 
-| event Name   | Description | Parameters |
+| 事件名称   | 描述 | 返回参数 |
 | ------------ | ----------- | ---------- |
-| colorChanged | triggered when the color is changed | returnValue|
+| colorChanged | 当颜色值、渐变色角度发生变化时触发本事件 | returnValue|
 
 ###### `returnValue` examples:
 
