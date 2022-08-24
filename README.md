@@ -1,6 +1,6 @@
 a Vue3.x based color picker component. 
 
-English | [中文](README.zh_CN.md)
+English | [中文](https://github.com/giacomohuang/colorpicker/blob/master/README.zh_CN.md)
 
 ## Features
 
