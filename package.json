@@ -34,7 +34,6 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
-    "fast-glob": "^3.2.11",
     "vue": "^3.2.37",
     "vue-router": "^4.0.16"
   },
