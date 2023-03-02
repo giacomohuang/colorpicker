@@ -33,9 +33,8 @@
     "unpub": "npm unpublish @mci/vue-colorpicker --force --registry=https://registry.npmjs.org",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
-  "dependencies": {
-    "vue": "^3.2.37",
-    "vue-router": "^4.0.16"
+  "peerDependencies": {
+    "vue": "^3.2.x"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
@@ -45,6 +44,7 @@
     "eslint-plugin-vue": "^9.0.0",
     "prettier": "^2.5.1",
     "sass": "^1.53.0",
+    "vue-router": "^4.0.16",
     "vite": "^2.9.12"
   }
 }
