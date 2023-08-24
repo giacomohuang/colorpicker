@@ -19,7 +19,7 @@ English | [中文](https://github.com/giacomohuang/colorpicker/blob/master/READM
 
 
 
-<div style="width:268px;height:347px">
+<div style="width:134px;height:173px">
 <video src="https://user-images.githubusercontent.com/20314549/180185437-259e668f-03ec-45ba-bb5a-bf7bd99973e2.mov" type="video/mp4" style="width:100%;height:100%;object-fill:fill" autoplay loop controls="false">
 </video>
 </div>
