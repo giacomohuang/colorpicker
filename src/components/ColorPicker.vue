@@ -60,19 +60,19 @@ const props = defineProps({
   mode: {
     type: String,
     required: false,
-    default: 'solid',
+    default: 'solid'
   },
   degree: {
     type: Number,
     required: false,
-    default: 90,
+    default: 90
   },
   color: {
     type: Object,
     required: false,
     default() {
       return { r: 0, g: 0, b: 0, a: 1 }
-    },
+    }
   },
   gradients: {
     type: Object,
@@ -80,10 +80,10 @@ const props = defineProps({
     default() {
       return [
         { percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } },
-        { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } },
+        { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }
       ]
-    },
-  },
+    }
+  }
 })
 
 const emit = defineEmits(['colorChanged'])
@@ -198,10 +198,10 @@ function bindContext() {
   return false
 }
 
-function bindKeyUp() {
-  if (window?.event?.keyCode == 27) {
+function bindKeyUp(evt) {
+  if (evt.keyCode == 27) {
     isShowPanel.value = false
-  } else if (window?.event?.keyCode == 32 || window?.event?.keyCode == 8) {
+  } else if (evt.keyCode == 32 || evt.keyCode == 8) {
     delGradPicker()
   }
 }
@@ -214,8 +214,8 @@ function getElPos(el) {
     html = doc.documentElement,
     clientTop = html.clientTop || body.clientTop || 0,
     clientLeft = html.clientLeft || body.clientLeft || 0,
-    top = Box.top + (self.pageYOffset || html.scrollTop || body.scrollTop) - clientTop,
-    left = Box.left + (self.pageXOffset || html.scrollLeft || body.scrollLeft) - clientLeft
+    top = Box.top + (self.scrollY || html.scrollTop || body.scrollTop) - clientTop,
+    left = Box.left + (self.scrollX || html.scrollLeft || body.scrollLeft) - clientLeft
   return { top: top, left: left }
 }
 
