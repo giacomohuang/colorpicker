@@ -1,16 +1,14 @@
 <template>
-  <!-- <div style="position: fixed; top: 0px; right: 0px; bottom: 0px; left: 0px; z-index: 100" ref="fixedEl"></div> -->
-
   <div onselectstart="return false">
-    <div class="cbtn" @click="isShowPanel = !isShowPanel" ref="cbtnEl">
+    <div class="cbtn" :class="props.size" @click="isShowPanel = !isShowPanel" ref="cbtnEl">
       <div class="cbtn-inner" :style="{ background: previewBackground }"></div>
     </div>
 
     <div class="panel" v-show="isShowPanel" ref="panelEl" @contextmenu.prevent="bindContext">
-      <div class="activeMode-wrapper">
-        <div class="btn-activeMode solid" :class="activeMode === 'solid' ? '' : 'gray'" @click.stop="changeMode('solid')"></div>
-        <div class="btn-activeMode linear" :class="activeMode === 'linear' ? '' : 'gray'" @click.stop="changeMode('linear')"></div>
-        <div class="btn-activeMode radial" :class="activeMode === 'radial' ? '' : 'gray'" @click.stop="changeMode('radial')"></div>
+      <div class="active-mode-wrapper" :style="{ display: modebar }">
+        <div title="solid" class="btn-active-mode solid" :class="activeMode === 'solid' ? '' : 'gray'" @click.stop="changeMode('solid')"></div>
+        <div title="linear" class="btn-active-mode linear" :class="activeMode === 'linear' ? '' : 'gray'" @click.stop="changeMode('linear')"></div>
+        <div title="radial" class="btn-active-mode radial" :class="activeMode === 'radial' ? '' : 'gray'" @click.stop="changeMode('radial')"></div>
       </div>
       <div class="grad-wrapper" :style="activeMode === 'solid' ? 'display:none' : ''">
         <div class="grad-bar" ref="gradBarEl" :style="{ backgroundImage: gradPreviewColor }" @click.stop="addGradPicker()">
@@ -20,7 +18,7 @@
           <div class="degree" ref="degreeEl" @click.stop="getDegreePickerPos" @mousedown.stop="bindDown($event, getDegreePickerPos)">
             <div class="picker-deg" ref="degreePickerEl" @mousedown.stop="bindDown($event, getDegreePickerPos)"></div>
           </div>
-          <div style="font-size: 10px; width: 36px; padding-left: 8px">{{ degree }}°</div>
+          <div style="font-size: 10px; width: 36px; padding-left: 8px; user-select: none">{{ degree }}°</div>
         </div>
       </div>
       <div class="palette-wrapper">
@@ -47,14 +45,14 @@
 </template>
 
 <script>
-export default { name: 'vue3-colorpicker' }
+export default { name: 'vue-colorpicker' }
 </script>
 
 <script setup>
 import { ref, reactive, onMounted, nextTick, watch } from 'vue'
 
-import Utils from '../assets/js/Color'
-import maskImgUrl from '../assets/img/optmask.png'
+import Utils from './assets/js/Color'
+import maskImgUrl from './assets/img/optmask.png'
 
 const props = defineProps({
   mode: {
@@ -67,12 +65,22 @@ const props = defineProps({
     required: false,
     default: 90
   },
+  size: {
+    type: String,
+    required: false,
+    default: 'medium'
+  },
   color: {
     type: Object,
     required: false,
     default() {
       return { r: 0, g: 0, b: 0, a: 1 }
     }
+  },
+  modebar: {
+    type: String,
+    required: false,
+    default: ''
   },
   gradients: {
     type: Object,
@@ -108,9 +116,13 @@ const gradPreviewColor = ref('')
 const isDropperEnabled = ref(true)
 
 const paletteColor = reactive(Utils.rgba2hsba(props.color))
-
 const degree = ref(props.degree)
+const modebar = ref(props.modebar)
 const activeMode = ref(props.mode)
+
+if (modebar.value == 'none') {
+  activeMode.value = 'solid'
+}
 
 let g = []
 const gradColors = ref(g)
@@ -207,7 +219,7 @@ function bindKeyUp(evt) {
 }
 
 //get HTML element's client position
-function getElPos(el) {
+function getBounding(el) {
   let Box = el.getBoundingClientRect(),
     doc = el.ownerDocument,
     body = doc.body,
@@ -242,7 +254,7 @@ function bindOutsideClick() {
     isShowPanel.value = false
   }
   function isInObject(el) {
-    const elPos = getElPos(el)
+    const elPos = getBounding(el)
     const mousePos = getMousePos()
     if (mousePos.x > elPos.left + el.offsetWidth || mousePos.x < elPos.left || mousePos.y > elPos.top + el.offsetHeight || mousePos.y < elPos.top) {
       return false
@@ -285,7 +297,7 @@ function delGradPicker() {
 }
 
 function getGradPickerPos(el, index) {
-  const elPos = getElPos(gradBarEl.value)
+  const elPos = getBounding(gradBarEl.value)
   const mousePos = getMousePos()
   let left = Math.max(-3, Math.min(barWidth - 12, mousePos.x - elPos.left - 6))
   el.style.left = left + 'px'
@@ -362,7 +374,7 @@ function updatePreviews() {
 function getDegreePickerPos() {
   const r = 10
   const bar_r = 4
-  const elPos = getElPos(degreeEl.value)
+  const elPos = getBounding(degreeEl.value)
   const mousePos = getMousePos()
   const rad = Math.atan2(elPos.top + r - mousePos.y, mousePos.x - elPos.left - r)
   degreePickerEl.value.style.left = Math.cos(rad) * r + bar_r + 1 + 'px'
@@ -389,7 +401,7 @@ function setDegreeHanderPos() {
 }
 
 function getPalettePickerPos() {
-  const elPos = getElPos(paletteEl.value)
+  const elPos = getBounding(paletteEl.value)
   const mousePos = getMousePos()
   const left = Math.max(-6, Math.min(mousePos.x - elPos.left - 6, paletteWidth - 6))
   const top = Math.max(-6, Math.min(mousePos.y - elPos.top - 6, paletteHeight - 6))
@@ -400,7 +412,7 @@ function getPalettePickerPos() {
 }
 
 function getHuePickerPos() {
-  const elPos = getElPos(hueBarEl.value)
+  const elPos = getBounding(hueBarEl.value)
   const mousePos = getMousePos()
   const left = Math.max(-3, Math.min(mousePos.x - elPos.left - 6, barWidth - 12))
   huePickerEl.value.style.left = left + 'px'
@@ -410,7 +422,7 @@ function getHuePickerPos() {
 }
 
 function getOpacityPickerPos() {
-  const elPos = getElPos(opactiyBarEl.value)
+  const elPos = getBounding(opactiyBarEl.value)
   const mousePos = getMousePos()
   const left = Math.max(-3, Math.min(barWidth - 12, mousePos.x - elPos.left - 6))
   opacityPickerEl.value.style.left = left + 'px'
@@ -428,6 +440,15 @@ function setPickerPos() {
 </script>
 
 <style lang="scss" scoped>
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  position: relative;
+  font-weight: normal;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -443,11 +464,28 @@ function setPickerPos() {
 .cbtn {
   border: 1px solid #dcdfe6;
   background: #ffffff;
-  border-radius: 4px;
-  width: 40px;
-  height: 40px;
-  padding: 6px;
 }
+
+.small {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  padding: 3px;
+}
+.medium {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+.large {
+  width: 44px;
+  height: 44px;
+  border-radius: 4px;
+  padding: 5px;
+}
+
 .cbtn-inner {
   background: #dcdfe6;
   width: 100%;
@@ -457,7 +495,7 @@ function setPickerPos() {
 .panel {
   position: absolute;
   background: #fff;
-  top: 45px;
+  margin-top: 6px;
   width: 240px;
   border: 1px solid #dcdfe6;
   border-radius: 6px;
@@ -485,7 +523,7 @@ function setPickerPos() {
     border-bottom: 6px solid #ffffff;
   }
 }
-.activeMode-wrapper {
+.active-mode-wrapper {
   border-bottom: 1px solid #dcdfe6;
   height: 40px;
   display: flex;
@@ -493,7 +531,7 @@ function setPickerPos() {
   align-items: center;
   padding-left: 12px;
 }
-.btn-activeMode {
+.btn-active-mode {
   border: 1px solid #ff7d3a;
   margin-right: 12px;
   border-radius: 50%;
@@ -573,7 +611,7 @@ function setPickerPos() {
 .dropper {
   width: 25px;
   height: 30px;
-  background: url('../assets/img/dropper@2x.png') center center no-repeat;
+  background: url('./assets/img/dropper@2x.png') center center no-repeat;
   background-size: 25px;
 }
 .grad-wrapper {
@@ -587,7 +625,7 @@ function setPickerPos() {
     border-radius: 8px;
     height: 12px;
     width: 150px;
-    background-image: url('../assets/img/optmask.png');
+    background-image: url('./assets/img/optmask.png');
     background-size: auto 100%;
     display: absolute;
   }
@@ -600,11 +638,18 @@ function setPickerPos() {
   height: 20px;
 }
 .picker-deg {
+  position: absolute;
+  display: inline-block;
+  z-index: 1;
   border: 1px solid #aaaaaa;
   border-radius: 5px;
   width: 8px;
   height: 8px;
   background: #cccccc;
+  &:hover,
+  &:active {
+    background: #999999;
+  }
 }
 
 .huebar-wrapper {
@@ -631,7 +676,7 @@ function setPickerPos() {
     background: linear-gradient(to right, #f00 0%, #ff0 17%, #0f0 33%, #0ff 50%, #00f 67%, #f0f 83%, #f00 100%);
   }
   .opacity-bar {
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%), url('../assets/img/optmask.png');
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%), url('./assets/img/optmask.png');
     background-size: auto 100%;
   }
 }
@@ -640,7 +685,7 @@ function setPickerPos() {
   height: 30px;
   border-radius: 50%;
   border: 1px solid #aaaaaa;
-  background-image: url('../assets/img/optmask.png');
+  background-image: url('./assets/img/optmask.png');
   background-size: 50% 50%;
 }
 .preview-color {

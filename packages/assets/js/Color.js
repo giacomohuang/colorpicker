@@ -1,4 +1,4 @@
-let Utils = {
+const Utils = {
   hsb2rgb(hsb) {
     var rgb = {}
     var h = Math.round(hsb.h)
@@ -87,6 +87,6 @@ let Utils = {
     hsba.s *= 100 / 255
     hsba.b *= 100 / 255
     return hsba
-  },
+  }
 }
 export default Utils

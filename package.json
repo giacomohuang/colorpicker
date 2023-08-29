@@ -5,13 +5,13 @@
   "bugs": {
     "url": "https://github.com/giacomohuang/colorpicker/issues"
   },
-  "version": "2.0.0",
+  "version": "2.1.0",
   "keywords": [
     "vuejs",
     "vue",
     "colorpicker",
+    "palette",
     "vue3.0",
-    "vuejs3.0",
     "vite"
   ],
   "license": "MIT",
@@ -30,21 +30,21 @@
     "build": "vite build",
     "preview": "vite preview --port 4173",
     "pub": "nrm use npm && npm publish --access public && nrm use taobao",
-    "unpub": "npm unpublish @mci/vue-colorpicker --force --registry=https://registry.npmjs.org",
+    "unpub": "npm unpublish @mcistudio/vue-colorpicker --force --registry=https://registry.npmjs.org",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "peerDependencies": {
-    "vue": "^3.2.x"
+    "vue": "^3.3.x"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
-    "@vitejs/plugin-vue": "^2.3.3",
+    "@vitejs/plugin-vue": "^4.3.3",
     "@vue/eslint-config-prettier": "^7.0.0",
     "eslint": "^8.5.0",
     "eslint-plugin-vue": "^9.0.0",
     "prettier": "^2.5.1",
     "sass": "^1.53.0",
-    "vue-router": "^4.0.16",
-    "vite": "^2.9.12"
+    "terser": "^5.19.2",
+    "vite": "^4.4.9"
   }
 }

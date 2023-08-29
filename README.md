@@ -18,11 +18,10 @@ English | [中文](https://github.com/giacomohuang/colorpicker/blob/master/READM
 
 
 
-
-<div style="width:134px;height:173px">
-<video src="https://user-images.githubusercontent.com/20314549/180185437-259e668f-03ec-45ba-bb5a-bf7bd99973e2.mov" type="video/mp4" style="width:100%;height:100%;object-fill:fill" autoplay loop controls="false">
+<video src="https://user-images.githubusercontent.com/20314549/180185437-259e668f-03ec-45ba-bb5a-bf7bd99973e2.mov" type="video/mp4" style="object-fill:fill" autoplay loop controls="false">
 </video>
-</div>
+
+
 
 ## Installation
 
@@ -90,6 +89,8 @@ function triggerChanged(color) {
 | --------- | ----------------------------------- | ---------- | --------------------------------------- | ------------------------------------------------------------ | -------- |
 | mode      | color mode                          | String     | solid<br />linear<br />radial<br /> | solid                                                        | No       |
 | degree    | drgee value in Linear-gradient mode | Number     | -                                       | 90                                                           | No       |
+| modebar | show mode bar | String | show<br/>none | show | No |
+| size | button size | String | small<br/>medium<br />large | medium | No |
 | color     | rgba color value in solid mode      | String     | -                                       | { r: 0, g: 0, b: 0, a: 1 }                                   | No       |
 | gradients | gradient list<br />                 | JSON Array | -                                       | [<br />  { <br />    percent: 0, <br />    color: { r: 255, g: 255, b: 255, a: 1 }<br />   }<br />   { <br />    percent: 100, <br />    color: { r: 0, g: 0, b: 0, a: 1 <br />    } <br />  }<br />] | No       |
 

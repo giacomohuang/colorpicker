@@ -1,4 +1,4 @@
-一款基于VueJS3.x拾色器组件。
+一款基于Vue3.x的拾色器组件。
 
 [English](README.md) | 中文
 
@@ -10,20 +10,18 @@
 - 通过取色器可以快速从你的屏幕上提取任何颜色。（支持谷歌浏览器95版本以上）。
 - 支持实时预览。
 
+
+
 ## Screenshot
 
-<img width="283" alt="image" src="https://user-images.githubusercontent.com/20314549/180416571-b0dfcf42-805c-45e9-8ca0-cfd6d67e14fa.png">
+<img width="282" alt="image" src="https://user-images.githubusercontent.com/20314549/180416571-b0dfcf42-805c-45e9-8ca0-cfd6d67e14fa.png">
 <img width="282" alt="image" src="https://user-images.githubusercontent.com/20314549/180416988-bb9ee230-8052-4ac0-ac40-9f4aad2814e7.png">
 <img width="282" alt="image" src="https://user-images.githubusercontent.com/20314549/180417207-58f2e7c3-39fb-4b86-8567-d819d5813605.png">
-
-
-
 
 <div style="width:268px;height:347px">
 <video src="https://user-images.githubusercontent.com/20314549/180185437-259e668f-03ec-45ba-bb5a-bf7bd99973e2.mov" type="video/mp4" style="width:100%;height:100%;object-fill:fill" autoplay loop controls="false">
 </video>
 </div>
-
 ## 安装
 
 ```bash
@@ -88,6 +86,8 @@ function triggerChanged(color) {
 | 参数名 | 描述                         | 数据类型       | 允许值                        | 默认值                                               | 是否必填 |
 | --------- | ----------------------------------- | ---------- | --------------------------------------- | ------------------------------------------------------------ | -------- |
 | mode      | 模式                          | String     | solid<br />linear<br />radial<br /> | solid                                                        | No       |
+| modebar | 是否显示模式选择条 | String | show<br/>none | show | No |
+| size | 按钮尺寸 | String | small<br/>medium<br />large | medium | No |
 | degree    | 渐变色角度，仅在linear-gradient模式中生效 | Number     | -                                       | 90                                                           | No       |
 | color     | 色值(rgba格式)，仅在solid模式中生效      | String     | -                                       | { r: 0, g: 0, b: 0, a: 1 }                                   | No       |
 | gradients | 渐变色值列表，仅在linear-gradient和radial-gradient模式中生效<br />                 | JSON Array | -                                       | [<br />  { <br />    percent: 0, <br />    color: { r: 255, g: 255, b: 255, a: 1 }<br />   }<br />   { <br />    percent: 100, <br />    color: { r: 0, g: 0, b: 0, a: 1 <br />    } <br />  }<br />] | No       |
