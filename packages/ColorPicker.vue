@@ -439,7 +439,7 @@ function setPickerPos() {
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 *,
 *::before,
 *::after {
@@ -448,7 +448,8 @@ function setPickerPos() {
   position: relative;
   font-weight: normal;
 }
-
+</style>
+<style lang="scss" scoped>
 .flex-row {
   display: flex;
   flex-direction: row;
