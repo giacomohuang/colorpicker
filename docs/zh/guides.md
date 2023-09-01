@@ -1,11 +1,11 @@
 # 开发指南
 
 ## 概览
-- Supports 3 CSS background color modes: `solid`, `linear-gradient` and `radial-gradient`.
-- Supports color opacity(alpha) adjustment.
-- Supports gradient bar control, easily drag/add/delete the control points.
-- The EyeDropper can quickly pick any color from your screen. （supports Google Chrome version 95+）
-- Supports live preview.
+- 支持3种CSS背景颜色模式：`solid`，`linear-gradient` 和 `radial-gradient`。
+- 支持颜色的不透明度（alpha）调整。
+- 支持梯度条控制，轻松拖动/添加/删除控制点。
+- 通过取色器可以快速从你的屏幕上提取任何颜色。（支持谷歌浏览器95版本以上）。
+- 支持实时预览。
 
 ![screenshot01](/screenshot01.png)
 ![screenshot02](/screenshot02.png)
