@@ -1,4 +1,5 @@
 一款基于Vue3.x的拾色器组件。
+
 [Guides & Examples](https://github.com/giacomohuang/colorpicker) | [文档和示例](https://github.com/giacomohuang/colorpicker/zh)
 
 ## 特性
