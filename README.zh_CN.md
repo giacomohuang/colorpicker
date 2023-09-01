@@ -1,7 +1,4 @@
 一款基于Vue3.x的拾色器组件。
-
-[English](README.md) | 中文
-
 ## 特性
 
 - 支持3种CSS背景颜色模式：`solid`，`linear-gradient` 和 `radial-gradient`。
