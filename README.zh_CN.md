@@ -1,4 +1,7 @@
 一款基于Vue3.x的拾色器组件。
+
+[Guides & Examples](https://giacomohuang.github.io/colorpicker) | [文档和示例](https://giacomohuang.github.io/colorpicker/zh)
+
 ## 特性
 
 - 支持3种CSS背景颜色模式：`solid`，`linear-gradient` 和 `radial-gradient`。
