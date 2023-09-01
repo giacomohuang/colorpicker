@@ -13,7 +13,7 @@ export default defineConfig({
   build: {
     lib: {
       // eslint-disable-next-line no-undef
-      entry: resolve(__dirname, 'packages/main.js'),
+      entry: resolve(__dirname, 'src/main.js'),
       name: 'ColorPicker',
       fileName: (format) => `colorpicker.${format}.js`
     },

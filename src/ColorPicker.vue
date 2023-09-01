@@ -1,5 +1,5 @@
 <template>
-  <div onselectstart="return false">
+  <div onselectstart="return false" style="position: relative">
     <div class="cbtn" :class="props.size" @click="isShowPanel = !isShowPanel" ref="cbtnEl">
       <div class="cbtn-inner" :style="{ background: previewBackground }"></div>
     </div>
@@ -18,7 +18,7 @@
           <div class="degree" ref="degreeEl" @click.stop="getDegreePickerPos" @mousedown.stop="bindDown($event, getDegreePickerPos)">
             <div class="picker-deg" ref="degreePickerEl" @mousedown.stop="bindDown($event, getDegreePickerPos)"></div>
           </div>
-          <div style="font-size: 10px; width: 36px; padding-left: 8px; user-select: none">{{ degree }}°</div>
+          <div style="font-size: 10px; width: 32px; padding-left: 8px; user-select: none">{{ degree }}°</div>
         </div>
       </div>
       <div class="palette-wrapper">
@@ -439,7 +439,7 @@ function setPickerPos() {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 *,
 *::before,
 *::after {
@@ -448,8 +448,6 @@ function setPickerPos() {
   position: relative;
   font-weight: normal;
 }
-</style>
-<style lang="scss" scoped>
 .flex-row {
   display: flex;
   flex-direction: row;
@@ -590,7 +588,6 @@ function setPickerPos() {
   position: absolute;
   width: 14px;
   height: 14px;
-  top: -4px;
   left: -4px;
   &::before {
     content: '';
@@ -616,6 +613,7 @@ function setPickerPos() {
   background-size: 25px;
 }
 .grad-wrapper {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -633,6 +631,7 @@ function setPickerPos() {
 }
 
 .degree {
+  position: relative;
   border: 1px solid #aaaaaa;
   border-radius: 50%;
   width: 20px;
@@ -668,6 +667,7 @@ function setPickerPos() {
   }
   .hue-bar,
   .opacity-bar {
+    position: relative;
     border: 1px solid #aaaaaa;
     border-radius: 8px;
     width: 150px;
@@ -690,8 +690,8 @@ function setPickerPos() {
   background-size: 50% 50%;
 }
 .preview-color {
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
 }
 </style>
