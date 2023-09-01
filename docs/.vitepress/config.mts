@@ -2,7 +2,8 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  base: '/docs/.vitepress/dist/',
+  // build for Github pages
+  base: '/colorpicker/',
   locales: {
     root: {
       label: 'English',
