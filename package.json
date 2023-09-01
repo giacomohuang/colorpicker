@@ -50,6 +50,7 @@
     "sass": "^1.53.0",
     "terser": "^5.19.2",
     "vite": "^4.4.9",
-    "vitepress": "^1.0.0-rc.10"
+    "vitepress": "^1.0.0-rc.10",
+    "@mcistudio/vue-colorpicker": "^2.1.3"
   }
 }
