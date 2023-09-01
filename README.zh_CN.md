@@ -1,6 +1,6 @@
 一款基于Vue3.x的拾色器组件。
 
-[Guides & Examples](https://github.com/giacomohuang/colorpicker) | [文档和示例](https://github.com/giacomohuang/colorpicker/zh)
+[Guides & Examples](https://giacomohuang.github.io/colorpicker) | [文档和示例](https://giacomohuang.github.io/colorpicker/zh)
 
 ## 特性
 
