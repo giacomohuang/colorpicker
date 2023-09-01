@@ -83,7 +83,11 @@ export default defineConfig({
           }
         ],
 
-        socialLinks: [{ icon: 'github', link: 'https://github.com/giacomohuang/vue-colorpicker' }]
+        socialLinks: [{ icon: 'github', link: 'https://github.com/giacomohuang/vue-colorpicker' }],
+        footer: {
+          message: 'Released under the MIT License.',
+          copyright: 'Copyright © 2022-present, Giacomo Huang, MCI Studio'
+        }
       }
     }
   }
