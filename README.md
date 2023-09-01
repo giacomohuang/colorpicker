@@ -1,6 +1,8 @@
 a Vue3.x based colorpicker component. 
 ## Features
 
+[Guides & Examples](https://github.com/giacomohuang/colorpicker/) | [文档和示例](https://github.com/giacomohuang/colorpicker/)
+
 - Supports 3 CSS background color modes: `solid`, `linear-gradient` and `radial-gradient`.
 - Supports color opacity(alpha) adjustment.
 - Supports gradient bar control, easily drag/add/delete the control points.
