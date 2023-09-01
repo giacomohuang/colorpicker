@@ -1,0 +1,35 @@
+{
+  "hash": "9e7d1cce",
+  "browserHash": "02dc812e",
+  "optimized": {
+    "vue": {
+      "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
+      "file": "vue.js",
+      "fileHash": "0b64be7b",
+      "needsInterop": false
+    },
+    "vitepress > @vue/devtools-api": {
+      "src": "../../../node_modules/@vue/devtools-api/lib/esm/index.js",
+      "file": "vitepress___@vue_devtools-api.js",
+      "fileHash": "eb390d07",
+      "needsInterop": false
+    },
+    "@theme/index": {
+      "src": "../../../../node_modules/vitepress/dist/client/theme-default/index.js",
+      "file": "@theme_index.js",
+      "fileHash": "54a2e16d",
+      "needsInterop": false
+    },
+    "@mcistudio/vue-colorpicker": {
+      "src": "../../../node_modules/@mcistudio/vue-colorpicker/dist/colorpicker.es.js",
+      "file": "@mcistudio_vue-colorpicker.js",
+      "fileHash": "15131158",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-IMLQGPPH": {
+      "file": "chunk-IMLQGPPH.js"
+    }
+  }
+}

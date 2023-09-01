@@ -32,7 +32,10 @@
     "preview": "vite preview --port 4173",
     "pub": "nrm use npm && npm publish --access public && nrm use taobao",
     "unpub": "npm unpublish @mcistudio/vue-colorpicker --force --registry=https://registry.npmjs.org",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "peerDependencies": {
     "vue": "^3.3.x"
@@ -46,6 +49,7 @@
     "prettier": "^2.5.1",
     "sass": "^1.53.0",
     "terser": "^5.19.2",
-    "vite": "^4.4.9"
+    "vite": "^4.4.9",
+    "vitepress": "^1.0.0-rc.10"
   }
 }
