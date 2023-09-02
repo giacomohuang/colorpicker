@@ -8,7 +8,7 @@ hero:
   actions:
     - theme: brand
       text: Guides
-      link: /Guides#overview
+      link: /guides#overview
     - theme: alt
       text: Examples
       link: /examples#props
