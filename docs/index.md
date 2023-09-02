@@ -8,10 +8,10 @@ hero:
   actions:
     - theme: brand
       text: Guides
-      link: /guides#overview
+      link: /guides
     - theme: alt
       text: Examples
-      link: /examples#props
+      link: /examples
   image:
     src: /logo.png
     width: 120
