@@ -29,7 +29,7 @@ function changed(color) {
 }
 ```
 
-- **medium** 
+- **medium**
 <ColorPicker mode="solid" size="medium" :color="{ r: 33, g: 137, b: 216, a: 1 }" @colorChanged="changed" />
 
 ```vue

@@ -1,14 +1,14 @@
 <template>
   <div onselectstart="return false" style="position: relative">
-    <div class="cbtn" :class="props.size" @click="isShowPanel = !isShowPanel" ref="cbtnEl">
+    <div class="cbtn" :class="[props.size, { active: isShowPanel }]" @click.stop="isShowPanel = !isShowPanel" ref="cbtnEl">
       <div class="cbtn-inner" :style="{ background: previewBackground }"></div>
     </div>
 
     <div class="panel" v-show="isShowPanel" ref="panelEl" @contextmenu.prevent="bindContext">
       <div class="active-mode-wrapper" :style="{ display: modebar }">
-        <div title="solid" class="btn-active-mode solid" :class="activeMode === 'solid' ? '' : 'gray'" @click.stop="changeMode('solid')"></div>
-        <div title="linear" class="btn-active-mode linear" :class="activeMode === 'linear' ? '' : 'gray'" @click.stop="changeMode('linear')"></div>
-        <div title="radial" class="btn-active-mode radial" :class="activeMode === 'radial' ? '' : 'gray'" @click.stop="changeMode('radial')"></div>
+        <div title="solid" class="btn-active-mode solid" :class="{ gray: activeMode === 'solid' }" @click.stop="changeMode('solid')"></div>
+        <div title="linear" class="btn-active-mode linear" :class="{ gray: activeMode === 'linear' }" @click.stop="changeMode('linear')"></div>
+        <div title="radial" class="btn-active-mode radial" :class="{ gray: activeMode === 'radial' }" @click.stop="changeMode('radial')"></div>
       </div>
       <div class="grad-wrapper" :style="activeMode === 'solid' ? 'display:none' : ''">
         <div class="grad-bar" ref="gradBarEl" :style="{ backgroundImage: gradPreviewColor }" @click.stop="addGradPicker()">
@@ -55,6 +55,9 @@ import Utils from './assets/js/Color'
 import maskImgUrl from './assets/img/optmask.png'
 
 const props = defineProps({
+  modelValue: {
+    type: Object
+  },
   mode: {
     type: String,
     required: false,
@@ -94,7 +97,11 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['colorChanged'])
+const emit = defineEmits(['update:modelValue'])
+
+const onColorChanged = (val) => {
+  emit('update:modelValue', val)
+}
 
 // refs
 const cbtnEl = ref(null)
@@ -245,22 +252,14 @@ function getMousePos() {
   return { x: x, y: y }
 }
 
-function bindOutsideClick() {
+function bindOutsideClick(e) {
+  var elem = e.target
   if (isDragging) {
     isDragging = false
     return false
   }
-  if (!isInObject(panelEl.value) && !isInObject(cbtnEl.value)) {
+  if (!panelEl.value.contains(elem) && !cbtnEl.value.contains(elem)) {
     isShowPanel.value = false
-  }
-  function isInObject(el) {
-    const elPos = getBounding(el)
-    const mousePos = getMousePos()
-    if (mousePos.x > elPos.left + el.offsetWidth || mousePos.x < elPos.left || mousePos.y > elPos.top + el.offsetHeight || mousePos.y < elPos.top) {
-      return false
-    } else {
-      return true
-    }
   }
 }
 
@@ -349,8 +348,10 @@ function updatePreviews() {
   emitVal.mode = activeMode.value
   switch (activeMode.value) {
     case 'solid':
-      emitVal.color = Utils.hsb2rgb(paletteColor)
-      emitVal.css = `background-color:${Utils.hsba2rgba(paletteColor)}`
+      emitVal.hsba = paletteColor
+      emitVal.rgba = Utils.hsb2rgb(paletteColor)
+      // console.log(emitVal.rgba)
+      emitVal.hex = Utils.rgba2hex(emitVal.rgba)
       break
     case 'linear':
       gradPreviewColor.value = `linear-gradient(to right,${gradStr.slice(1)}),url('${maskImgUrl}')`
@@ -368,7 +369,7 @@ function updatePreviews() {
       emitVal.css = gradStyleStr
       break
   }
-  emit('colorChanged', emitVal)
+  onColorChanged(emitVal)
 }
 
 function getDegreePickerPos() {
@@ -463,6 +464,13 @@ function setPickerPos() {
 .cbtn {
   border: 1px solid #dcdfe6;
   background: #ffffff;
+  cursor: pointer;
+  &:hover {
+    border-color: #999;
+  }
+  &.active {
+    border-color: #999;
+  }
 }
 
 .small {

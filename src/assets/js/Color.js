@@ -50,22 +50,29 @@ const Utils = {
     const c = this.hsb2rgb(hsba)
     return `rgba(${c.r},${c.g},${c.b},${c.a})`
   },
-  rgb2hex(rgb) {
-    var hex = [rgb.r.toString(16), rgb.g.toString(16), rgb.b.toString(16)]
-    hex.map(function (str, i) {
-      if (str.length == 1) {
-        hex[i] = '0' + str
-      }
-    })
-    return hex.join('')
+  rgba2hex(rgba) {
+    const toHex = (color) => {
+      const hex = color.toString(16)
+      return hex.length < 2 ? '0' + hex : hex
+    }
+    const alpha = rgba.a >= 0 ? Math.round(rgba.a * 255) : 0
+    let alphaHex = ''
+    if (alpha !== 255) {
+      alphaHex = toHex(alpha)
+    }
+    return '#' + toHex(rgba.r) + toHex(rgba.g) + toHex(rgba.b) + alphaHex
   },
-  hex2rgb(hex) {
-    let h = parseInt(hex.indexOf('#') > -1 ? hex.substring(1) : hex, 16)
-    return { r: h >> 16, g: (h & 0x00ff00) >> 8, b: h & 0x0000ff }
+  hex2rgba(hex) {
+    const isEightDigits = hex.length === 9
+    let r = parseInt(hex.slice(1, 3), 16)
+    let g = parseInt(hex.slice(3, 5), 16)
+    let b = parseInt(hex.slice(5, 7), 16)
+    let a = isEightDigits ? +(parseInt(hex.slice(7, 9), 16) / 255).toFixed(2) : 1
+    return `{r:${r},g:${g},b:${b},a:${a})`
   },
 
   hex2hsb(hex) {
-    const rgba = this.hex2rgb(hex)
+    const rgba = this.hex2rgba(hex)
     rgba.a = 1
     return this.rgba2hsba(rgba)
   },
