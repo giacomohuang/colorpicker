@@ -1,12 +1,12 @@
 <template>
-  <ColorPicker v-model="data" :color="{ r: 120, g: 12, b: 12, a: 1 }"></ColorPicker>
+  <ColorPicker v-model="data"></ColorPicker>
   {{ data }}
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import ColorPicker from '../ColorPicker.vue'
-const data = ref({})
+const data = ref({ color: { r: 120, g: 10, b: 10, a: 1 }, mode: 'solid' })
 </script>
 
 <style scoped></style>

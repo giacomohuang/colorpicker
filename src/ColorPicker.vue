@@ -58,42 +58,15 @@ const props = defineProps({
   modelValue: {
     type: Object
   },
-  mode: {
-    type: String,
-    required: false,
-    default: 'solid'
-  },
-  degree: {
-    type: Number,
-    required: false,
-    default: 90
-  },
   size: {
     type: String,
     required: false,
     default: 'medium'
   },
-  color: {
-    type: Object,
-    required: false,
-    default() {
-      return { r: 0, g: 0, b: 0, a: 1 }
-    }
-  },
   modebar: {
     type: String,
     required: false,
     default: ''
-  },
-  gradients: {
-    type: Object,
-    required: false,
-    default() {
-      return [
-        { percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } },
-        { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }
-      ]
-    }
   }
 })
 
@@ -122,24 +95,31 @@ const previewBackground = ref('')
 const gradPreviewColor = ref('')
 const isDropperEnabled = ref(true)
 
-const paletteColor = reactive(Utils.rgba2hsba(props.color))
-const degree = ref(props.degree)
+const paletteColor = reactive(Utils.rgba2hsba(props.modelValue.color))
+const degree = ref(props.modelValue.degree || 90)
+degree.value = degree.value < 0 ? 0 : degree.value
+
 const modebar = ref(props.modebar)
-const activeMode = ref(props.mode)
+if (!['none', 'show'].includes(props.modelValue.modebar)) modebar.value = 'show'
+
+const activeMode = ref(props.modelValue.mode || 'solid')
+if (!['solid', 'linear', 'radial'].includes(props.modelValue.mode)) activeMode.value = 'solid'
 
 if (modebar.value == 'none') {
   activeMode.value = 'solid'
 }
 
-let g = []
-const gradColors = ref(g)
-props.gradients.forEach((item, index) => {
-  g.push({ id: index, percent: item.percent, color: Utils.rgba2hsba(item.color) })
+const gradients = ref(
+  props.modelValue.gradients || [
+    { percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } },
+    { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }
+  ]
+)
+const gradColors = ref([])
+gradients.value.forEach((item, index) => {
+  gradColors.value.push({ id: index, percent: item.percent, color: Utils.rgba2hsba(item.color) })
 })
-gradColors.value = g
-if (g.length > 0) {
-  gradColors.value[gradColors.value.length - 1].id
-}
+
 let isDragging = false
 let paletteWidth = 216
 let paletteHeight = 138
@@ -157,8 +137,6 @@ if ('EyeDropper' in window) {
 
 onMounted(() => {
   changeMode(activeMode.value)
-  updateGradColor()
-  updatePreviews()
 })
 
 watch(paletteColor, () => {
@@ -300,7 +278,7 @@ function getGradPickerPos(el, index) {
   const mousePos = getMousePos()
   let left = Math.max(-3, Math.min(barWidth - 12, mousePos.x - elPos.left - 6))
   el.style.left = left + 'px'
-  gradColors.value[index].percent = ((left + 3) / (barWidth - 9)) * 100
+  gradColors.value[index].percent = Math.round(((left + 3) / (barWidth - 9)) * 100)
   activeGradPickerIndex.value = index
   const c = gradColors.value[index].color
   paletteColor.h = c.h
@@ -314,7 +292,7 @@ function getGradPickerPos(el, index) {
 
 function setGradPickerPos() {
   gradColors.value.forEach((item, index) => {
-    gradBarEl.value.children[index].style.left = ((barWidth - 9) / 100) * item.percent - 3 + 'px'
+    gradBarEl.value.children[index].style.left = Math.round(((barWidth - 9) / 100) * item.percent - 3) + 'px'
   })
 }
 
@@ -348,6 +326,7 @@ function updatePreviews() {
   emitVal.mode = activeMode.value
   switch (activeMode.value) {
     case 'solid':
+      console.log(paletteColor)
       emitVal.hsba = paletteColor
       emitVal.rgba = Utils.hsb2rgb(paletteColor)
       // console.log(emitVal.rgba)
@@ -408,8 +387,8 @@ function getPalettePickerPos() {
   const top = Math.max(-6, Math.min(mousePos.y - elPos.top - 6, paletteHeight - 6))
   palettePickerEl.value.style.left = left + 'px'
   palettePickerEl.value.style.top = top + 'px'
-  paletteColor.s = (100 * (left + 6)) / paletteWidth
-  paletteColor.b = (100 * (paletteHeight - top - 6)) / paletteHeight
+  paletteColor.s = Math.round((100 * (left + 6)) / paletteWidth)
+  paletteColor.b = Math.round((100 * (paletteHeight - top - 6)) / paletteHeight)
 }
 
 function getHuePickerPos() {
@@ -417,7 +396,7 @@ function getHuePickerPos() {
   const mousePos = getMousePos()
   const left = Math.max(-3, Math.min(mousePos.x - elPos.left - 6, barWidth - 12))
   huePickerEl.value.style.left = left + 'px'
-  paletteColor.h = (360 * (left + 3)) / (barWidth - 9)
+  paletteColor.h = Math.round((360 * (left + 3)) / (barWidth - 9))
   const c = Utils.hsb2rgb({ h: paletteColor.h, s: 100, b: 100, a: paletteColor.a })
   paletteEl.value.style.background = `rgb(${c.r},${c.g},${c.b},1)`
 }
@@ -427,7 +406,7 @@ function getOpacityPickerPos() {
   const mousePos = getMousePos()
   const left = Math.max(-3, Math.min(barWidth - 12, mousePos.x - elPos.left - 6))
   opacityPickerEl.value.style.left = left + 'px'
-  paletteColor.a = (left + 3) / (barWidth - 9)
+  paletteColor.a = ((left + 3) / (barWidth - 9)).toFixed(2)
 }
 
 function setPickerPos() {

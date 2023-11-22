@@ -93,6 +93,9 @@ const Utils = {
     if (hsba.h < 0) hsba.h += 360
     hsba.s *= 100 / 255
     hsba.b *= 100 / 255
+    hsba.h = Math.round(hsba.h)
+    hsba.s = Math.round(hsba.s)
+    hsba.b = Math.round(hsba.b)
     return hsba
   }
 }
