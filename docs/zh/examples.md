@@ -1,8 +1,39 @@
+<script setup>
+import { useData } from 'vitepress'
+// import ColorPicker from '@mcistudio/vue-colorpicker'
+// import '@mcistudio/vue-colorpicker/dist/style.css'
+// import { ref } from 'vue'
+
+// const data1 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
+// const data2 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
+// const data3 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
+// const data4 = ref({mode:'solid',color:{ r: 33, g: 137, b: 216, a: 1 }})
+// const data5 = ref({
+//   mode: 'linear',
+//   degree: 90,
+//   gradients: [
+//     { percent: 10, color: { r: 255, g: 10, b: 20, a: 0.5 } },
+//     { percent: 100, color: { r: 59, g: 50, b: 240, a: 1 } }
+//   ]
+// })
+// const data6 = ref({
+//   mode: 'radial',
+//   gradients: [
+//     { percent: 10, color: { r: 255, g: 10, b: 20, a: 0.5 } },
+//     { percent: 100, color: { r: 59, g: 50, b: 240, a: 1 } }
+//   ]
+// })
+// const data7 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
+
+// function changed(color) {
+//   console.log('color changed', color)
+// }
+</script>
+
 # 示例
 ## size
 
 - **small** 
-<ColorPicker v-model="data1" size="small" />
 
 ```vue
 <template>
@@ -18,7 +49,6 @@ const data1 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
 ```
 
 - **medium**
-<ColorPicker v-model="data2" size="medium" />
 
 ```vue
 <template>
@@ -34,7 +64,6 @@ const data2 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
 ```
 
 - **large** 
-<ColorPicker v-model="data3" size="large" />
 
 ```vue
 <template>
@@ -52,7 +81,6 @@ const data3 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
 ## mode
 
 - **solid** 
-<ColorPicker v-model="data4" />
 
 ```vue
 <template>
@@ -68,8 +96,6 @@ const data4 = ref({mode:'solid',color:{ r: 33, g: 137, b: 216, a: 1 }})
 ```
 
 - **linear** 
-
-<ColorPicker v-model="data5" />
 
 ```vue
 <template>
@@ -95,7 +121,6 @@ const data5 = ref({
 
 - **radial** 
 
-<ColorPicker v-model="data6" />
 
 ```vue
 <template>
@@ -118,8 +143,6 @@ const data6 = ref({
 
 ## modebar
 
-<ColorPicker v-model="data7" modebar="none" />
-
 ```vue
 <template>
   <ColorPicker v-model="data7" modebar="none" />
@@ -132,35 +155,3 @@ import { ref } from 'vue'
 const data7 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
 </script>
 ```
-
-
-<script setup>
-import { useData } from 'vitepress'
-import ColorPicker from '@mcistudio/vue-colorpicker'
-import '@mcistudio/vue-colorpicker/dist/style.css'
-import { ref } from 'vue'
-const data1 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
-const data2 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
-const data3 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
-const data4 = ref({mode:'solid',color:{ r: 33, g: 137, b: 216, a: 1 }})
-const data5 = ref({
-  mode: 'linear',
-  degree: 90,
-  gradients: [
-    { percent: 10, color: { r: 255, g: 10, b: 20, a: 0.5 } },
-    { percent: 100, color: { r: 59, g: 50, b: 240, a: 1 } }
-  ]
-})
-const data6 = ref({
-  mode: 'radial',
-  gradients: [
-    { percent: 10, color: { r: 255, g: 10, b: 20, a: 0.5 } },
-    { percent: 100, color: { r: 59, g: 50, b: 240, a: 1 } }
-  ]
-})
-const data7 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
-
-function changed(color) {
-  console.log('color changed', color)
-}
-</script>
