@@ -100,10 +100,7 @@ const degree = ref(props.modelValue.degree || 90)
 degree.value = degree.value < 0 ? 0 : degree.value
 
 const modebar = ref(props.modebar)
-console.log(modebar.value)
 if (!['none', 'show'].includes(modebar.value)) modebar.value = 'show'
-
-console.log(modebar.value)
 
 const activeMode = ref(props.modelValue.mode || 'solid')
 if (!['solid', 'linear', 'radial'].includes(activeMode.value)) activeMode.value = 'solid'
