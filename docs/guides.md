@@ -41,19 +41,28 @@ import '@mcistudio/vue-colorpicker/dist/style.css'
 ```
 
 ## Props
-| Prop Name | Description                         | Type       | Accepted Value                         | Default Value                                                | Required |
+
+| Prop Name | Description                         | Type   | Accepted Value | Default Value | Required |
+| --------- | ----------------------------------- | ------ | -------------- | ------------- | -------- |
+| v-model   | binding value                  | JSON | `<v-model>`      |         | No       |
+| modebar   | show mode bar                       | String | show<br/>none  | show          | No       |
+| size      | button size | String | small<br/>medium<br />large | medium | No |
+
+`v-model`
+
+|  | Description                         | Type       | Accepted Value                         | Default Value                                                | Required |
 | --------- | ----------------------------------- | ---------- | --------------------------------------- | ------------------------------------------------------------ | -------- |
 | mode      | color mode                          | String     | solid<br />linear<br />radial<br /> | solid                                                        | No       |
-| degree    | drgee value in Linear-gradient mode | Number     | -                                       | 90                                                           | No       |
-| modebar   | show mode bar | String | show<br/>none | show | No |
-| size      | button size | String | small<br/>medium<br />large | medium | No |
 | color     | rgba color value in solid mode      | String     | -                                       | \{ r: 0, g: 0, b: 0, a: 1 \}                                   | No       |
+| hex | Hex color value in solid mode (Read Only) | String | - | - | No |
+| degree    | drgee value in Linear-gradient mode | Number     | -                                       | 90                                                           | No       |
 | gradients | gradient list<br />                 | JSON Array | -                                       | [<br />  { <br />    percent: 0, <br />    color: { r: 255, g: 255, b: 255, a: 1 }<br />   }<br />   { <br />    percent: 100, <br />    color: { r: 0, g: 0, b: 0, a: 1 } <br />  }<br />]``` | No       |
 
 ## Events
+
 | event Name   | Description | Parameters |
 | ------------ | ----------- | ---------- |
-| colorChanged | triggered when the color is changed | returnValue|
+| colorChanged | Triggered when color changes | returnValue|
 
 ###### `returnValue` examples:
 
@@ -67,6 +76,7 @@ import '@mcistudio/vue-colorpicker/dist/style.css'
         "b": 0,
         "a": 1
     },
+  	'hex':'#000000',
     "css": "background-color:rgba(0,0,0,1)"
 }
 ```

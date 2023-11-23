@@ -70,7 +70,7 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'colorChanged'])
 
 const onColorChanged = (val) => {
   emit('update:modelValue', val)
@@ -95,7 +95,7 @@ const previewBackground = ref('')
 const gradPreviewColor = ref('')
 const isDropperEnabled = ref(true)
 
-const paletteColor = reactive(Utils.rgba2hsba(props.modelValue.color))
+const paletteColor = reactive(Utils.rgba2hsba(props.modelValue.color || { r: 0, g: 0, b: 0, a: 1 }))
 const degree = ref(props.modelValue.degree || 90)
 degree.value = degree.value < 0 ? 0 : degree.value
 
@@ -326,11 +326,10 @@ function updatePreviews() {
   emitVal.mode = activeMode.value
   switch (activeMode.value) {
     case 'solid':
-      console.log(paletteColor)
-      emitVal.hsba = paletteColor
-      emitVal.rgba = Utils.hsb2rgb(paletteColor)
+      // emitVal.hsba = paletteColor
+      emitVal.color = Utils.hsb2rgb(paletteColor)
       // console.log(emitVal.rgba)
-      emitVal.hex = Utils.rgba2hex(emitVal.rgba)
+      emitVal.hex = Utils.rgba2hex(emitVal.color)
       break
     case 'linear':
       gradPreviewColor.value = `linear-gradient(to right,${gradStr.slice(1)}),url('${maskImgUrl}')`
@@ -349,6 +348,7 @@ function updatePreviews() {
       break
   }
   onColorChanged(emitVal)
+  emit('colorChanged', emitVal)
 }
 
 function getDegreePickerPos() {

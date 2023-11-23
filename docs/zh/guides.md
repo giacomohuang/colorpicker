@@ -41,13 +41,20 @@ import '@mcistudio/vue-colorpicker/dist/style.css'
 ```
 ### Props 参数
 
+| 参数名  | 描述               | 数据类型 | 允许值                      | 默认值 | 是否必填 |
+| ------- | ------------------ | -------- | --------------------------- | ------ | -------- |
+| V-model | 绑定值             | JSON     | `<v-model>`                 |        | No       |
+| modebar | 是否显示模式选择条 | String   | show<br/>none               | show   | No       |
+| size    | 按钮尺寸           | String   | small<br/>medium<br />large | medium | No       |
+
+`<v-model>`
+
 | 参数名 | 描述                         | 数据类型       | 允许值                        | 默认值                                               | 是否必填 |
 | --------- | ----------------------------------- | ---------- | --------------------------------------- | ------------------------------------------------------------ | -------- |
 | mode      | 模式                          | String     | solid<br />linear<br />radial<br /> | solid                                                        | No       |
-| modebar | 是否显示模式选择条 | String | show<br/>none | show | No |
-| size | 按钮尺寸 | String | small<br/>medium<br />large | medium | No |
-| degree    | 渐变色角度，仅在linear-gradient模式中生效 | Number     | -                                       | 90                                                           | No       |
 | color     | 色值(rgba格式)，仅在solid模式中生效      | String     | -                                       | \{ r: 0, g: 0, b: 0, a: 1 \}                                   | No       |
+| hex | 色值(hex格式)，仅在solid模式中生效，只读 | String | - | - | No |
+| degree    | 渐变色角度，仅在linear-gradient模式中生效 | Number     | -                                       | 90                                                           | No       |
 | gradients | 渐变色值列表，仅在linear-gradient和radial-gradient模式中生效<br />                 | JSON Array | -                                       | [<br />{<br />percent: 0, <br />color: { r: 255, g: 255, b: 255, a: 1 \}<br />   \}<br />   \{ <br />percent: 100, <br />color: \{ r: 0, g: 0, b: 0, a: 1 <br />\} <br />  \}<br />] | No       |
 
 
@@ -69,6 +76,7 @@ import '@mcistudio/vue-colorpicker/dist/style.css'
         "b": 0,
         "a": 1
     },
+  	'hex':'#000000'
     "css": "background-color:rgba(0,0,0,1)"
 }
 ```
