@@ -1,6 +1,6 @@
 <template>
   <div style="display: flex; align-items: center">
-    <ColorPicker v-model="data" size="small" @colorChange="onChanged"></ColorPicker>
+    <ColorPicker v-model="data" size="small" @colorChange="onChanged" modebar="none"></ColorPicker>
     <div style="margin-left: 12px">{{ data }}</div>
   </div>
 </template>

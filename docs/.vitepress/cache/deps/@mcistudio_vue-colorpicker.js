@@ -1,7 +1,9 @@
 import {
   Fragment,
+  createApp,
   createBaseVNode,
   createElementBlock,
+  createVNode,
   nextTick,
   normalizeClass,
   normalizeStyle,
@@ -17,7 +19,7 @@ import {
   watch,
   withDirectives,
   withModifiers
-} from "./chunk-IMLQGPPH.js";
+} from "./chunk-AJVDBJPB.js";
 
 // docs/node_modules/@mcistudio/vue-colorpicker/dist/colorpicker.es.js
 var Utils = {
@@ -70,21 +72,28 @@ var Utils = {
     const c = this.hsb2rgb(hsba);
     return `rgba(${c.r},${c.g},${c.b},${c.a})`;
   },
-  rgb2hex(rgb) {
-    var hex = [rgb.r.toString(16), rgb.g.toString(16), rgb.b.toString(16)];
-    hex.map(function(str, i) {
-      if (str.length == 1) {
-        hex[i] = "0" + str;
-      }
-    });
-    return hex.join("");
+  rgba2hex(rgba) {
+    const toHex = (color) => {
+      const hex = color.toString(16);
+      return hex.length < 2 ? "0" + hex : hex;
+    };
+    const alpha = rgba.a >= 0 ? Math.round(rgba.a * 255) : 0;
+    let alphaHex = "";
+    if (alpha !== 255) {
+      alphaHex = toHex(alpha);
+    }
+    return "#" + toHex(rgba.r) + toHex(rgba.g) + toHex(rgba.b) + alphaHex;
   },
-  hex2rgb(hex) {
-    let h = parseInt(hex.indexOf("#") > -1 ? hex.substring(1) : hex, 16);
-    return { r: h >> 16, g: (h & 65280) >> 8, b: h & 255 };
+  hex2rgba(hex) {
+    const isEightDigits = hex.length === 9;
+    let r = parseInt(hex.slice(1, 3), 16);
+    let g = parseInt(hex.slice(3, 5), 16);
+    let b = parseInt(hex.slice(5, 7), 16);
+    let a = isEightDigits ? +(parseInt(hex.slice(7, 9), 16) / 255).toFixed(2) : 1;
+    return `{r:${r},g:${g},b:${b},a:${a})`;
   },
   hex2hsb(hex) {
-    const rgba = this.hex2rgb(hex);
+    const rgba = this.hex2rgba(hex);
     rgba.a = 1;
     return this.rgba2hsba(rgba);
   },
@@ -109,6 +118,9 @@ var Utils = {
       hsba.h += 360;
     hsba.s *= 100 / 255;
     hsba.b *= 100 / 255;
+    hsba.h = Math.round(hsba.h);
+    hsba.s = Math.round(hsba.s);
+    hsba.b = Math.round(hsba.b);
     return hsba;
   }
 };
@@ -120,12 +132,12 @@ var _export_sfc = (sfc, props) => {
   }
   return target;
 };
-var _withScopeId = (n) => (pushScopeId("data-v-58b8afd3"), n = n(), popScopeId(), n);
-var _hoisted_1 = {
+var _withScopeId = (n) => (pushScopeId("data-v-ce563947"), n = n(), popScopeId(), n);
+var _hoisted_1$1 = {
   onselectstart: "return false",
   style: { "position": "relative" }
 };
-var _hoisted_2 = ["onContextmenu"];
+var _hoisted_2$1 = ["onContextmenu"];
 var _hoisted_3 = ["onClick", "onMousedown"];
 var _hoisted_4 = ["onClick"];
 var _hoisted_5 = { style: { "font-size": "10px", "width": "32px", "padding-left": "8px", "user-select": "none" } };
@@ -140,49 +152,28 @@ var _hoisted_13 = ["onClick"];
 var _hoisted_14 = ["onClick"];
 var _hoisted_15 = { class: "preview-wrapper" };
 var __default__ = { name: "vue-colorpicker" };
-var _sfc_main = Object.assign(__default__, {
+var _sfc_main$1 = Object.assign(__default__, {
   props: {
-    mode: {
-      type: String,
-      required: false,
-      default: "solid"
-    },
-    degree: {
-      type: Number,
-      required: false,
-      default: 90
+    modelValue: {
+      type: Object
     },
     size: {
       type: String,
       required: false,
       default: "medium"
     },
-    color: {
-      type: Object,
-      required: false,
-      default() {
-        return { r: 0, g: 0, b: 0, a: 1 };
-      }
-    },
     modebar: {
       type: String,
       required: false,
       default: ""
-    },
-    gradients: {
-      type: Object,
-      required: false,
-      default() {
-        return [
-          { percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } },
-          { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }
-        ];
-      }
     }
   },
-  emits: ["colorChanged"],
+  emits: ["update:modelValue", "colorChanged"],
   setup(__props, { emit }) {
     const props = __props;
+    const onColorChanged = (val) => {
+      emit("update:modelValue", val);
+    };
     const cbtnEl = ref(null);
     const panelEl = ref(null);
     const paletteEl = ref(null);
@@ -200,22 +191,28 @@ var _sfc_main = Object.assign(__default__, {
     const previewBackground = ref("");
     const gradPreviewColor = ref("");
     const isDropperEnabled = ref(true);
-    const paletteColor = reactive(Utils.rgba2hsba(props.color));
-    const degree = ref(props.degree);
+    const paletteColor = reactive(Utils.rgba2hsba(props.modelValue.color || { r: 0, g: 0, b: 0, a: 1 }));
+    const degree = ref(props.modelValue.degree || 90);
+    degree.value = degree.value < 0 ? 0 : degree.value;
     const modebar = ref(props.modebar);
-    const activeMode = ref(props.mode);
+    if (!["none", "show"].includes(props.modelValue.modebar))
+      modebar.value = "show";
+    const activeMode = ref(props.modelValue.mode || "solid");
+    if (!["solid", "linear", "radial"].includes(props.modelValue.mode))
+      activeMode.value = "solid";
     if (modebar.value == "none") {
       activeMode.value = "solid";
     }
-    let g = [];
-    const gradColors = ref(g);
-    props.gradients.forEach((item, index) => {
-      g.push({ id: index, percent: item.percent, color: Utils.rgba2hsba(item.color) });
+    const gradients = ref(
+      props.modelValue.gradients || [
+        { percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } },
+        { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }
+      ]
+    );
+    const gradColors = ref([]);
+    gradients.value.forEach((item, index) => {
+      gradColors.value.push({ id: index, percent: item.percent, color: Utils.rgba2hsba(item.color) });
     });
-    gradColors.value = g;
-    if (g.length > 0) {
-      gradColors.value[gradColors.value.length - 1].id;
-    }
     let isDragging = false;
     let paletteWidth = 216;
     let paletteHeight = 138;
@@ -230,8 +227,6 @@ var _sfc_main = Object.assign(__default__, {
     }
     onMounted(() => {
       changeMode(activeMode.value);
-      updateGradColor();
-      updatePreviews();
     });
     watch(paletteColor, () => {
       updateGradColor();
@@ -303,22 +298,14 @@ var _sfc_main = Object.assign(__default__, {
       }
       return { x, y };
     }
-    function bindOutsideClick() {
+    function bindOutsideClick(e) {
+      var elem = e.target;
       if (isDragging) {
         isDragging = false;
         return false;
       }
-      if (!isInObject(panelEl.value) && !isInObject(cbtnEl.value)) {
+      if (!panelEl.value.contains(elem) && !cbtnEl.value.contains(elem)) {
         isShowPanel.value = false;
-      }
-      function isInObject(el) {
-        const elPos = getBounding(el);
-        const mousePos = getMousePos();
-        if (mousePos.x > elPos.left + el.offsetWidth || mousePos.x < elPos.left || mousePos.y > elPos.top + el.offsetHeight || mousePos.y < elPos.top) {
-          return false;
-        } else {
-          return true;
-        }
       }
     }
     function bindDown(el, fnMove, index) {
@@ -354,7 +341,7 @@ var _sfc_main = Object.assign(__default__, {
       const mousePos = getMousePos();
       let left = Math.max(-3, Math.min(barWidth - 12, mousePos.x - elPos.left - 6));
       el.style.left = left + "px";
-      gradColors.value[index].percent = (left + 3) / (barWidth - 9) * 100;
+      gradColors.value[index].percent = Math.round((left + 3) / (barWidth - 9) * 100);
       activeGradPickerIndex.value = index;
       const c = gradColors.value[index].color;
       paletteColor.h = c.h;
@@ -367,7 +354,7 @@ var _sfc_main = Object.assign(__default__, {
     }
     function setGradPickerPos() {
       gradColors.value.forEach((item, index) => {
-        gradBarEl.value.children[index].style.left = (barWidth - 9) / 100 * item.percent - 3 + "px";
+        gradBarEl.value.children[index].style.left = Math.round((barWidth - 9) / 100 * item.percent - 3) + "px";
       });
     }
     function updateGradColor() {
@@ -384,12 +371,12 @@ var _sfc_main = Object.assign(__default__, {
       previewBackground.value = previewColor.value;
       let gradStr = "";
       let gradStyleStr = "";
-      let g2 = [...gradColors.value];
+      let g = [...gradColors.value];
       let gradArr = [];
-      g2.sort((a, b) => {
+      g.sort((a, b) => {
         return a.percent - b.percent;
       });
-      g2.forEach((item) => {
+      g.forEach((item) => {
         gradStr += "," + Utils.hsba2rgba(item.color) + " " + item.percent + "%";
         gradArr.push({ percent: item.percent, color: Utils.hsb2rgb(item.color) });
       });
@@ -398,7 +385,7 @@ var _sfc_main = Object.assign(__default__, {
       switch (activeMode.value) {
         case "solid":
           emitVal.color = Utils.hsb2rgb(paletteColor);
-          emitVal.css = `background-color:${Utils.hsba2rgba(paletteColor)}`;
+          emitVal.hex = Utils.rgba2hex(emitVal.color);
           break;
         case "linear":
           gradPreviewColor.value = `linear-gradient(to right,${gradStr.slice(1)}),url('${maskImgUrl}')`;
@@ -416,6 +403,7 @@ var _sfc_main = Object.assign(__default__, {
           emitVal.css = gradStyleStr;
           break;
       }
+      onColorChanged(emitVal);
       emit("colorChanged", emitVal);
     }
     function getDegreePickerPos() {
@@ -452,15 +440,15 @@ var _sfc_main = Object.assign(__default__, {
       const top = Math.max(-6, Math.min(mousePos.y - elPos.top - 6, paletteHeight - 6));
       palettePickerEl.value.style.left = left + "px";
       palettePickerEl.value.style.top = top + "px";
-      paletteColor.s = 100 * (left + 6) / paletteWidth;
-      paletteColor.b = 100 * (paletteHeight - top - 6) / paletteHeight;
+      paletteColor.s = Math.round(100 * (left + 6) / paletteWidth);
+      paletteColor.b = Math.round(100 * (paletteHeight - top - 6) / paletteHeight);
     }
     function getHuePickerPos() {
       const elPos = getBounding(hueBarEl.value);
       const mousePos = getMousePos();
       const left = Math.max(-3, Math.min(mousePos.x - elPos.left - 6, barWidth - 12));
       huePickerEl.value.style.left = left + "px";
-      paletteColor.h = 360 * (left + 3) / (barWidth - 9);
+      paletteColor.h = Math.round(360 * (left + 3) / (barWidth - 9));
       const c = Utils.hsb2rgb({ h: paletteColor.h, s: 100, b: 100, a: paletteColor.a });
       paletteEl.value.style.background = `rgb(${c.r},${c.g},${c.b},1)`;
     }
@@ -469,7 +457,7 @@ var _sfc_main = Object.assign(__default__, {
       const mousePos = getMousePos();
       const left = Math.max(-3, Math.min(barWidth - 12, mousePos.x - elPos.left - 6));
       opacityPickerEl.value.style.left = left + "px";
-      paletteColor.a = (left + 3) / (barWidth - 9);
+      paletteColor.a = ((left + 3) / (barWidth - 9)).toFixed(2);
     }
     function setPickerPos() {
       const c = Utils.hsb2rgb({ h: paletteColor.h, s: 100, b: 100, a: paletteColor.a });
@@ -480,10 +468,10 @@ var _sfc_main = Object.assign(__default__, {
       opacityPickerEl.value.style.left = (barWidth - 9) * paletteColor.a - 3 + "px";
     }
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1, [
+      return openBlock(), createElementBlock("div", _hoisted_1$1, [
         createBaseVNode("div", {
-          class: normalizeClass(["cbtn", props.size]),
-          onClick: _cache[0] || (_cache[0] = ($event) => isShowPanel.value = !isShowPanel.value),
+          class: normalizeClass(["cbtn", [props.size, { active: isShowPanel.value }]]),
+          onClick: _cache[0] || (_cache[0] = withModifiers(($event) => isShowPanel.value = !isShowPanel.value, ["stop"])),
           ref_key: "cbtnEl",
           ref: cbtnEl
         }, [
@@ -504,17 +492,17 @@ var _sfc_main = Object.assign(__default__, {
           }, [
             createBaseVNode("div", {
               title: "solid",
-              class: normalizeClass(["btn-active-mode solid", activeMode.value === "solid" ? "" : "gray"]),
+              class: normalizeClass(["btn-active-mode solid", { gray: activeMode.value === "solid" }]),
               onClick: _cache[1] || (_cache[1] = withModifiers(($event) => changeMode("solid"), ["stop"]))
             }, null, 2),
             createBaseVNode("div", {
               title: "linear",
-              class: normalizeClass(["btn-active-mode linear", activeMode.value === "linear" ? "" : "gray"]),
+              class: normalizeClass(["btn-active-mode linear", { gray: activeMode.value === "linear" }]),
               onClick: _cache[2] || (_cache[2] = withModifiers(($event) => changeMode("linear"), ["stop"]))
             }, null, 2),
             createBaseVNode("div", {
               title: "radial",
-              class: normalizeClass(["btn-active-mode radial", activeMode.value === "radial" ? "" : "gray"]),
+              class: normalizeClass(["btn-active-mode radial", { gray: activeMode.value === "radial" }]),
               onClick: _cache[3] || (_cache[3] = withModifiers(($event) => changeMode("radial"), ["stop"]))
             }, null, 2)
           ], 4),
@@ -624,16 +612,40 @@ var _sfc_main = Object.assign(__default__, {
               }, null, 4)
             ])
           ])
-        ], 40, _hoisted_2), [
+        ], 40, _hoisted_2$1), [
           [vShow, isShowPanel.value]
         ])
       ]);
     };
   }
 });
-var ColorPicker = _export_sfc(_sfc_main, [["__scopeId", "data-v-58b8afd3"]]);
-ColorPicker.install = function(app) {
-  app.component("ColorPicker", ColorPicker);
+var ColorPicker = _export_sfc(_sfc_main$1, [["__scopeId", "data-v-ce563947"]]);
+var _hoisted_1 = { style: { "display": "flex", "align-items": "center" } };
+var _hoisted_2 = { style: { "margin-left": "12px" } };
+var _sfc_main = {
+  __name: "MainView",
+  setup(__props) {
+    const data = ref({ color: { r: 33, g: 137, b: 216, a: 1 } });
+    function onChanged(val) {
+      console.log(val);
+    }
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createVNode(ColorPicker, {
+          modelValue: data.value,
+          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => data.value = $event),
+          size: "small",
+          onColorChange: onChanged
+        }, null, 8, ["modelValue"]),
+        createBaseVNode("div", _hoisted_2, toDisplayString(data.value), 1)
+      ]);
+    };
+  }
+};
+var app = createApp(_sfc_main);
+app.mount("#app");
+ColorPicker.install = function(app2) {
+  app2.component("ColorPicker", ColorPicker);
 };
 export {
   ColorPicker as default

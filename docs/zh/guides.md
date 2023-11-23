@@ -76,7 +76,7 @@ import '@mcistudio/vue-colorpicker/dist/style.css'
         "b": 0,
         "a": 1
     },
-  	'hex':'#000000'
+  	"hex":'#000000'
     "css": "background-color:rgba(0,0,0,1)"
 }
 ```

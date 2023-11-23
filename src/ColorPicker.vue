@@ -66,7 +66,7 @@ const props = defineProps({
   modebar: {
     type: String,
     required: false,
-    default: ''
+    default: 'show'
   }
 })
 
@@ -100,10 +100,13 @@ const degree = ref(props.modelValue.degree || 90)
 degree.value = degree.value < 0 ? 0 : degree.value
 
 const modebar = ref(props.modebar)
-if (!['none', 'show'].includes(props.modelValue.modebar)) modebar.value = 'show'
+console.log(modebar.value)
+if (!['none', 'show'].includes(modebar.value)) modebar.value = 'show'
+
+console.log(modebar.value)
 
 const activeMode = ref(props.modelValue.mode || 'solid')
-if (!['solid', 'linear', 'radial'].includes(props.modelValue.mode)) activeMode.value = 'solid'
+if (!['solid', 'linear', 'radial'].includes(activeMode.value)) activeMode.value = 'solid'
 
 if (modebar.value == 'none') {
   activeMode.value = 'solid'
