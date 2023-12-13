@@ -95,14 +95,14 @@ const previewBackground = ref('')
 const gradPreviewColor = ref('')
 const isDropperEnabled = ref(true)
 
-const paletteColor = reactive(Utils.rgba2hsba(props.modelValue.color || { r: 0, g: 0, b: 0, a: 1 }))
-const degree = ref(props.modelValue.degree || 90)
+const paletteColor = reactive(Utils.rgba2hsba(props.modelValue?.color || { r: 0, g: 0, b: 0, a: 1 }))
+const degree = ref(props.modelValue?.degree || 90)
 degree.value = degree.value < 0 ? 0 : degree.value
 
 const modebar = ref(props.modebar)
 if (!['none', 'show'].includes(modebar.value)) modebar.value = 'show'
 
-const activeMode = ref(props.modelValue.mode || 'solid')
+const activeMode = ref(props.modelValue?.mode || 'solid')
 if (!['solid', 'linear', 'radial'].includes(activeMode.value)) activeMode.value = 'solid'
 
 if (modebar.value == 'none') {
@@ -110,7 +110,7 @@ if (modebar.value == 'none') {
 }
 
 const gradients = ref(
-  props.modelValue.gradients || [
+  props.modelValue?.color || [
     { percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } },
     { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }
   ]
