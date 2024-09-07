@@ -8,10 +8,10 @@ hero:
   actions:
     - theme: brand
       text: 开发指南
-      link: /guides
+      link: /zh/guides
     - theme: alt
       text: 示例
-      link: /examples
+      link: /zh/examples
   image:
     src: /logo.png
     width: 120
