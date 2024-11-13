@@ -68,7 +68,7 @@ const Utils = {
     let g = parseInt(hex.slice(3, 5), 16)
     let b = parseInt(hex.slice(5, 7), 16)
     let a = isEightDigits ? +(parseInt(hex.slice(7, 9), 16) / 255).toFixed(2) : 1
-    return `{r:${r},g:${g},b:${b},a:${a})`
+    return {r:r,g:g,b:b,a:a}
   },
 
   hex2hsb(hex) {
