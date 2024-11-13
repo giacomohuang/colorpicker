@@ -15,7 +15,11 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm run build
+      - name: Install dependencies 📦️
+        run: npm install
+      - name: build
+        run: npm run build
+
 
   publish-npm:
     needs: build
