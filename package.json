@@ -5,7 +5,7 @@
   "bugs": {
     "url": "https://github.com/giacomohuang/colorpicker/issues"
   },
-  "version": "2.2.4",
+  "version": "2.2.5",
   "keywords": [
     "vuejs",
     "vue",
@@ -14,7 +14,7 @@
     "palette",
     "vite"
   ],
-  "description": "a Vue3.x Based Colorpicker Component.",
+  "description": "a Vue3 Based Colorpicker Component.",
   "license": "MIT",
   "private": false,
   "module": "dist/colorpicker.es.js",
