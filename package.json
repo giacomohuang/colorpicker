@@ -5,7 +5,7 @@
   "bugs": {
     "url": "https://github.com/giacomohuang/colorpicker/issues"
   },
-  "version": "2.2.6",
+  "version": "2.2.7",
   "keywords": [
     "vuejs",
     "vue",
@@ -24,7 +24,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/giacomohuang/colorpicker.git"
+    "url": "git+https://github.com/giacomohuang/colorpicker.git"
   },
   "scripts": {
     "dev": "vite",
