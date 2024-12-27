@@ -5,13 +5,13 @@ on:
     branches: [master]
     paths:
       - 'packages/colorpicker/**'
+      - 'package.json'
+      - 'pnpm-workspace.yaml'
+      - 'pnpm-lock.yaml'
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/colorpicker
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2
@@ -22,16 +22,13 @@ jobs:
           node-version: 20
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm build
 
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/colorpicker
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2
@@ -43,10 +40,11 @@ jobs:
           registry-url: https://registry.npmjs.org/
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Build
         run: pnpm build
       - name: Publish
+        working-directory: packages/colorpicker
         run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

@@ -5,6 +5,10 @@ on:
     branches: [master]
     paths:
       - "packages/docs/**"
+      - "packages/colorpicker/**"
+      - "package.json"
+      - "pnpm-workspace.yaml"
+      - "pnpm-lock.yaml"
   workflow_dispatch:
 
 permissions:
@@ -19,9 +23,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: packages/docs
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -36,9 +37,11 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Install dependencies
-        run: pnpm install
-      - name: Build
-        run: pnpm docs:build
+        run: pnpm install --frozen-lockfile
+      - name: Build colorpicker
+        run: pnpm build:deps
+      - name: Build docs
+        run: pnpm --filter @mcistudio/colorpicker-docs docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
