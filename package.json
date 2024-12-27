@@ -1,12 +1,12 @@
 {
-  "name": "@mcistudio/colorpicker-monorepo",
+  "name": "colorpicker-monorepo",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter @mcistudio/vue-colorpicker dev",
-    "dev:docs": "pnpm build:deps && pnpm --filter @mcistudio/colorpicker-docs docs:dev",
-    "build:docs": "pnpm build:deps && pnpm --filter @mcistudio/colorpicker-docs docs:build",
-    "build": "pnpm --filter @mcistudio/vue-colorpicker build",
-    "build:deps": "pnpm --filter @mcistudio/vue-colorpicker build",
+    "dev": "pnpm -F @colorpicker/libs dev",
+    "dev:docs": "pnpm build:deps && pnpm -F @colorpicker/docs docs:dev",
+    "build:docs": "pnpm build:deps && pnpm -F @colorpicker/docs docs:build",
+    "build": "pnpm -F @colorpicker/libs build",
+    "build:deps": "pnpm -F @colorpicker/libs build",
     "test": "pnpm -r test",
     "lint": "pnpm -r lint"
   },

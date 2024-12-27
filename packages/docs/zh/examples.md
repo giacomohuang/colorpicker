@@ -1,7 +1,7 @@
 <script setup>
 import { useData } from 'vitepress'
-import ColorPicker from '@mcistudio/vue-colorpicker/dist/colorpicker.es.js'
-import '@mcistudio/vue-colorpicker/dist/style.css'
+import ColorPicker from '@mcistudio/vue-colorpicker'
+import '@mcistudio/vue-colorpicker/dist/vue-colorpicker.css'
 import { ref } from 'vue'
 
 // const data1 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
@@ -46,7 +46,7 @@ import { ref } from 'vue'
 
 <script setup>
 import ColorPicker from "@mcistudio/vue-colorpicker";
-import "@mcistudio/vue-colorpicker/dist/style.css";
+import "@mcistudio/vue-colorpicker/dist/vue-colorpicker.css";
 import { ref } from "vue";
 const data1 = ref({ color: { r: 33, g: 137, b: 216, a: 1 } });
 </script>

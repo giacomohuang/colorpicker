@@ -1,11 +1,11 @@
 {
-  "name": "@mcistudio/vue-colorpicker",
+  "name": "@colorpicker/libs",
   "author": "Huang Jia <giacomohuang@qq.com>",
   "homepage": "https://giacomohuang.github.io/colorpicker/zh",
   "bugs": {
     "url": "https://github.com/giacomohuang/colorpicker/issues"
   },
-  "version": "2.2.13",
+  "version": "2.2.14",
   "keywords": [
     "vuejs",
     "vue",

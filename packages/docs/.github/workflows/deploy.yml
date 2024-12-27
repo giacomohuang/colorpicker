@@ -40,7 +40,7 @@ jobs:
       - name: Build colorpicker
         run: pnpm build:deps
       - name: Build docs
-        run: pnpm --filter @mcistudio/colorpicker-docs docs:build
+        run: pnpm --filter colorpicker-docs docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:

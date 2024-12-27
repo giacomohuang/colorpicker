@@ -17,7 +17,8 @@ export default defineConfig(({ command }) => {
       lib: {
         entry: path.resolve(__dirname, './src/main.js'),
         name: 'ColorPicker',
-        fileName: (format) => `colorpicker.${format}.js`
+        fileName: (format) => `colorpicker.${format}.js`,
+        formats: ['es', 'umd']
       },
       rollupOptions: {
         external: ['vue'],
