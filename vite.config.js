@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import path from 'path'
+
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [vue()],
@@ -16,7 +16,7 @@ export default defineConfig(({ command }) => {
       lib: {
         entry: './src/main.js',
         name: 'ColorPicker',
-        fileName: 'colorpicker'
+        fileName: (format) => `colorpicker.${format}.js`
       },
       rollupOptions: {
         external: ['vue'],
