@@ -1,63 +1,19 @@
 {
-  "name": "@mcistudio/vue-colorpicker",
-  "author": "Huang Jia <giacomohuang@qq.com>",
-  "homepage": "https://giacomohuang.github.io/colorpicker/zh",
-  "bugs": {
-    "url": "https://github.com/giacomohuang/colorpicker/issues"
-  },
-  "version": "2.2.11",
-  "keywords": [
-    "vuejs",
-    "vue",
-    "vue3",
-    "colorpicker",
-    "palette",
-    "vite"
+  "name": "@mcistudio/colorpicker-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
   ],
-  "description": "a Vue3 Based Colorpicker Component.",
-  "license": "MIT",
-  "private": false,
-  "module": "dist/colorpicker.es.js",
-  "main": "dist/colorpicker.umd.js",
-  "files": [
-    "dist/**/*"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/giacomohuang/colorpicker.git"
-  },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview --port 4173",
-    "pub": "npm publish --access public",
-    "unpub": "npm unpublish @mcistudio/vue-colorpicker --force --registry=https://registry.npmjs.org",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
-  },
-  "peerDependencies": {
-    "vue": "^3.5.x"
+    "dev": "pnpm -F colorpicker dev",
+    "dev:docs": "pnpm -F docs docs:dev",
+    "build:docs": "pnpm -F docs docs:build",
+    "build": "pnpm -F colorpicker build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.10.4",
-    "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/eslint-config-prettier": "^10.1.0",
-    "eslint": "^9.17.0",
-    "eslint-plugin-vue": "^9.32.0",
-    "prettier": "^3.4.2",
-    "sass": "^1.83.0",
-    "terser": "^5.37.0",
-    "vite": "^6.0.6",
-    "vitepress": "^1.5.0",
-    "vue": "^3.5.13"
-  },
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/colorpicker.es.js",
-      "require": "./dist/colorpicker.umd.js"
-    }
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
   }
 }
