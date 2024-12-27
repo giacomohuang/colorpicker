@@ -37,14 +37,10 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Install dependencies
         run: pnpm install
-      - name: Build colorpicker
+      - name: Build colorpicker Docs
         run: pnpm build:deps
-      - name: Check build output
-        run: |
-          ls -la packages/colorpicker/dist
-          cat packages/colorpicker/dist/colorpicker.es.js || echo "File not found"
       - name: Build docs
-        run: pnpm --filter colorpicker-docs docs:build
+        run: pnpm --filter @colorpicker/docs docs:build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:

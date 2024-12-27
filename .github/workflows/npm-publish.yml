@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
     paths:
-      - "packages/colorpicker/**"
+      - "packages/libs/**"
       - "package.json"
       - "pnpm-workspace.yaml"
 
@@ -43,7 +43,7 @@ jobs:
       - name: Build
         run: pnpm build
       - name: Publish
-        working-directory: packages/colorpicker
+        working-directory: packages/libs
         run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
