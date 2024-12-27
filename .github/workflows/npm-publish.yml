@@ -22,7 +22,7 @@ jobs:
           node-version: 20
           cache: "pnpm"
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
       - name: Build
         run: pnpm build
 
@@ -39,10 +39,6 @@ jobs:
           node-version: 20
           registry-url: https://registry.npmjs.org/
           cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: Build
-        run: pnpm build
       - name: Publish
         working-directory: packages/colorpicker
         run: pnpm publish --no-git-checks
