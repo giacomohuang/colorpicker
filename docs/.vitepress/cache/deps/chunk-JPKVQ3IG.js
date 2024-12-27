@@ -1,5 +1,24 @@
-import { ref, reactive, onMounted, watch, nextTick, openBlock, createElementBlock, withModifiers, createElementVNode, normalizeClass, normalizeStyle, withDirectives, Fragment, renderList, toDisplayString, vShow } from "vue";
-const Utils = {
+import {
+  Fragment,
+  createBaseVNode,
+  createElementBlock,
+  nextTick,
+  normalizeClass,
+  normalizeStyle,
+  onMounted,
+  openBlock,
+  reactive,
+  ref,
+  renderList,
+  toDisplayString,
+  vShow,
+  watch,
+  withDirectives,
+  withModifiers
+} from "./chunk-VJWGEPT5.js";
+
+// node_modules/@mcistudio/vue-colorpicker/dist/colorpicker.es.js
+var Utils = {
   hsb2rgb(hsb) {
     var rgb = {};
     var h = Math.round(hsb.h);
@@ -95,22 +114,26 @@ const Utils = {
     return hsba;
   }
 };
-const maskImgUrl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEKADAAQAAAABAAAAEAAAAAA0VXHyAAAAM0lEQVQ4EWM8cuTIfwY8wMbGhhGPNAMTPkli5EYNYBgEgYg3jkHRSCidjEbjYIhGimMBAKIWB2rXs92IAAAAAElFTkSuQmCC";
-const _export_sfc = (sfc, props) => {
+var maskImgUrl = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAEKADAAQAAAABAAAAEAAAAAA0VXHyAAAAM0lEQVQ4EWM8cuTIfwY8wMbGhhGPNAMTPkli5EYNYBgEgYg3jkHRSCidjEbjYIhGimMBAKIWB2rXs92IAAAAAElFTkSuQmCC";
+var _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
   for (const [key, val] of props) {
     target[key] = val;
   }
   return target;
 };
-const _hoisted_1 = ["onClick", "onMousedown"];
-const _hoisted_2 = { style: { "font-size": "10px", "width": "32px", "padding-left": "8px", "user-select": "none" } };
-const _hoisted_3 = { class: "palette-wrapper" };
-const _hoisted_4 = { class: "huebar-wrapper" };
-const _hoisted_5 = { class: "bar-wrapper" };
-const _hoisted_6 = { class: "preview-wrapper" };
-const __default__ = { name: "vue-colorpicker" };
-const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
+var _hoisted_1 = {
+  onselectstart: "return false",
+  style: { "position": "relative" }
+};
+var _hoisted_2 = ["onClick", "onMousedown"];
+var _hoisted_3 = { style: { "font-size": "10px", "width": "32px", "padding-left": "8px", "user-select": "none" } };
+var _hoisted_4 = { class: "palette-wrapper" };
+var _hoisted_5 = { class: "huebar-wrapper" };
+var _hoisted_6 = { class: "bar-wrapper" };
+var _hoisted_7 = { class: "preview-wrapper" };
+var __default__ = { name: "vue-colorpicker" };
+var _sfc_main = Object.assign(__default__, {
   props: {
     modelValue: {
       type: Object
@@ -426,53 +449,49 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
       opacityPickerEl.value.style.left = (barWidth - 9) * paletteColor.a - 3 + "px";
     }
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        onSelectstart: _cache[13] || (_cache[13] = withModifiers(() => {
-        }, ["prevent"])),
-        style: { "position": "relative" }
-      }, [
-        createElementVNode("div", {
+      return openBlock(), createElementBlock("div", _hoisted_1, [
+        createBaseVNode("div", {
           class: normalizeClass(["cbtn", [props.size, { active: isShowPanel.value }]]),
           onClick: _cache[0] || (_cache[0] = withModifiers(($event) => isShowPanel.value = !isShowPanel.value, ["stop"])),
           ref_key: "cbtnEl",
           ref: cbtnEl
         }, [
-          createElementVNode("div", {
+          createBaseVNode("div", {
             class: "cbtn-inner",
             style: normalizeStyle({ background: previewBackground.value })
           }, null, 4)
         ], 2),
-        withDirectives(createElementVNode("div", {
+        withDirectives(createBaseVNode("div", {
           class: "panel",
           ref_key: "panelEl",
           ref: panelEl,
           onContextmenu: withModifiers(bindContext, ["prevent"])
         }, [
-          createElementVNode("div", {
+          createBaseVNode("div", {
             class: "active-mode-wrapper",
             style: normalizeStyle({ display: modebar.value })
           }, [
-            createElementVNode("div", {
+            createBaseVNode("div", {
               title: "solid",
               class: normalizeClass(["btn-active-mode solid", { gray: activeMode.value === "solid" }]),
               onClick: _cache[1] || (_cache[1] = withModifiers(($event) => changeMode("solid"), ["stop"]))
             }, null, 2),
-            createElementVNode("div", {
+            createBaseVNode("div", {
               title: "linear",
               class: normalizeClass(["btn-active-mode linear", { gray: activeMode.value === "linear" }]),
               onClick: _cache[2] || (_cache[2] = withModifiers(($event) => changeMode("linear"), ["stop"]))
             }, null, 2),
-            createElementVNode("div", {
+            createBaseVNode("div", {
               title: "radial",
               class: normalizeClass(["btn-active-mode radial", { gray: activeMode.value === "radial" }]),
               onClick: _cache[3] || (_cache[3] = withModifiers(($event) => changeMode("radial"), ["stop"]))
             }, null, 2)
           ], 4),
-          createElementVNode("div", {
+          createBaseVNode("div", {
             class: "grad-wrapper",
             style: normalizeStyle(activeMode.value === "solid" ? "display:none" : "")
           }, [
-            createElementVNode("div", {
+            createBaseVNode("div", {
               class: "grad-bar",
               ref_key: "gradBarEl",
               ref: gradBarEl,
@@ -486,41 +505,41 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
                   class: normalizeClass(["picker", index == activeGradPickerIndex.value ? "on" : ""]),
                   onClick: withModifiers(($event) => getGradPickerPos($event.target, index), ["stop"]),
                   onMousedown: withModifiers(($event) => bindDown($event.target, getGradPickerPos, index), ["stop"])
-                }, null, 42, _hoisted_1);
+                }, null, 42, _hoisted_2);
               }), 128))
             ], 4),
-            createElementVNode("div", {
+            createBaseVNode("div", {
               class: "flex-row",
               style: normalizeStyle(activeMode.value === "linear" ? "" : "visibility:hidden")
             }, [
-              createElementVNode("div", {
+              createBaseVNode("div", {
                 class: "degree",
                 ref_key: "degreeEl",
                 ref: degreeEl,
                 onClick: withModifiers(getDegreePickerPos, ["stop"]),
                 onMousedown: _cache[6] || (_cache[6] = withModifiers(($event) => bindDown($event, getDegreePickerPos), ["stop"]))
               }, [
-                createElementVNode("div", {
+                createBaseVNode("div", {
                   class: "picker-deg",
                   ref_key: "degreePickerEl",
                   ref: degreePickerEl,
                   onMousedown: _cache[5] || (_cache[5] = withModifiers(($event) => bindDown($event, getDegreePickerPos), ["stop"]))
                 }, null, 544)
               ], 544),
-              createElementVNode("div", _hoisted_2, toDisplayString(degree.value) + "°", 1)
+              createBaseVNode("div", _hoisted_3, toDisplayString(degree.value) + "°", 1)
             ], 4)
           ], 4),
-          createElementVNode("div", _hoisted_3, [
-            createElementVNode("div", {
+          createBaseVNode("div", _hoisted_4, [
+            createBaseVNode("div", {
               class: "palette",
               ref_key: "paletteEl",
               ref: paletteEl,
               onClick: withModifiers(getPalettePickerPos, ["stop"]),
               onMousedown: _cache[8] || (_cache[8] = withModifiers(($event) => bindDown($event, getPalettePickerPos), ["stop"]))
             }, [
-              _cache[14] || (_cache[14] = createElementVNode("div", { class: "white" }, null, -1)),
-              _cache[15] || (_cache[15] = createElementVNode("div", { class: "black" }, null, -1)),
-              createElementVNode("div", {
+              _cache[13] || (_cache[13] = createBaseVNode("div", { class: "white" }, null, -1)),
+              _cache[14] || (_cache[14] = createBaseVNode("div", { class: "black" }, null, -1)),
+              createBaseVNode("div", {
                 class: "picker",
                 ref_key: "palettePickerEl",
                 ref: palettePickerEl,
@@ -528,21 +547,21 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
               }, null, 544)
             ], 544)
           ]),
-          createElementVNode("div", _hoisted_4, [
-            createElementVNode("div", {
+          createBaseVNode("div", _hoisted_5, [
+            createBaseVNode("div", {
               class: "dropper",
               onClick: dropColor,
               style: normalizeStyle([{ "cursor": "pointer" }, isDropperEnabled.value ? "" : "opacity: 50%;cursor:default"])
             }, null, 4),
-            createElementVNode("div", _hoisted_5, [
-              createElementVNode("div", {
+            createBaseVNode("div", _hoisted_6, [
+              createBaseVNode("div", {
                 class: "hue-bar",
                 ref_key: "hueBarEl",
                 ref: hueBarEl,
                 onClick: withModifiers(getHuePickerPos, ["stop"]),
                 onMousedown: _cache[10] || (_cache[10] = withModifiers(($event) => bindDown($event, getHuePickerPos), ["stop"]))
               }, [
-                createElementVNode("div", {
+                createBaseVNode("div", {
                   class: "picker",
                   ref_key: "huePickerEl",
                   ref: huePickerEl,
@@ -550,14 +569,14 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
                   onMousedown: _cache[9] || (_cache[9] = withModifiers(($event) => bindDown($event, getHuePickerPos), ["stop"]))
                 }, null, 544)
               ], 544),
-              createElementVNode("div", {
+              createBaseVNode("div", {
                 class: "opacity-bar",
                 ref_key: "opactiyBarEl",
                 ref: opactiyBarEl,
                 onClick: withModifiers(getOpacityPickerPos, ["stop"]),
                 onMousedown: _cache[12] || (_cache[12] = withModifiers(($event) => bindDown($event, getOpacityPickerPos), ["stop"]))
               }, [
-                createElementVNode("div", {
+                createBaseVNode("div", {
                   class: "picker",
                   ref_key: "opacityPickerEl",
                   ref: opacityPickerEl,
@@ -567,8 +586,8 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
                 }, null, 544)
               ], 544)
             ]),
-            createElementVNode("div", _hoisted_6, [
-              createElementVNode("div", {
+            createBaseVNode("div", _hoisted_7, [
+              createBaseVNode("div", {
                 class: "preview-color",
                 style: normalizeStyle({ background: previewColor.value })
               }, null, 4)
@@ -577,14 +596,16 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
         ], 544), [
           [vShow, isShowPanel.value]
         ])
-      ], 32);
+      ]);
     };
   }
 });
-const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-59360534"]]);
+var ColorPicker = _export_sfc(_sfc_main, [["__scopeId", "data-v-5a8a2488"]]);
 ColorPicker.install = function(app) {
   app.component("ColorPicker", ColorPicker);
 };
+
 export {
-  ColorPicker as default
+  ColorPicker
 };
+//# sourceMappingURL=chunk-JPKVQ3IG.js.map

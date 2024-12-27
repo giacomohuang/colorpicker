@@ -1,35 +1,50 @@
 {
-  "hash": "4cd69e00",
+  "hash": "844c8cae",
   "configHash": "4550a0f7",
-  "lockfileHash": "a9d6026a",
-  "browserHash": "47575c5a",
+  "lockfileHash": "e8ca4dc8",
+  "browserHash": "1d486681",
   "optimized": {
     "vue": {
       "src": "../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "f46f274b",
+      "fileHash": "8678f340",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "b4ac84cf",
+      "fileHash": "0095fb72",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "d3d80ddf",
+      "fileHash": "f2132dee",
       "needsInterop": false
     },
     "@theme/index": {
       "src": "../../../node_modules/vitepress/dist/client/theme-default/index.js",
       "file": "@theme_index.js",
-      "fileHash": "8ed31bcf",
+      "fileHash": "b9b84e14",
+      "needsInterop": false
+    },
+    "@mcistudio/vue-colorpicker": {
+      "src": "../../../node_modules/@mcistudio/vue-colorpicker/dist/colorpicker.es.js",
+      "file": "@mcistudio_vue-colorpicker.js",
+      "fileHash": "746cada6",
+      "needsInterop": false
+    },
+    "@mcistudio/vue-colorpicker/dist/colorpicker.es.js": {
+      "src": "../../../node_modules/@mcistudio/vue-colorpicker/dist/colorpicker.es.js",
+      "file": "@mcistudio_vue-colorpicker_dist_colorpicker__es__js.js",
+      "fileHash": "a197c6b7",
       "needsInterop": false
     }
   },
   "chunks": {
+    "chunk-JPKVQ3IG": {
+      "file": "chunk-JPKVQ3IG.js"
+    },
     "chunk-I3QSUKZX": {
       "file": "chunk-I3QSUKZX.js"
     },

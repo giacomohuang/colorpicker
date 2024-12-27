@@ -10,5 +10,11 @@ module.exports = {
   rules: {
     'vue/multi-word-component-names': 'off',
     'prettier/prettier': 'off'
+  },
+  env: {
+    es2020: true, // <- activate “es2020” globals
+    browser: true,
+    node: true,
+    mocha: true
   }
 }

@@ -5,7 +5,7 @@
   "bugs": {
     "url": "https://github.com/giacomohuang/colorpicker/issues"
   },
-  "version": "2.2.8",
+  "version": "2.2.9",
   "keywords": [
     "vuejs",
     "vue",
@@ -30,7 +30,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 4173",
-    "pub": "nrm use npm && npm publish --access public && nrm use taobao",
+    "pub": "npm publish --access public",
     "unpub": "npm unpublish @mcistudio/vue-colorpicker --force --registry=https://registry.npmjs.org",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
     "docs:dev": "vitepress dev docs",
@@ -38,20 +38,25 @@
     "docs:preview": "vitepress preview docs"
   },
   "peerDependencies": {
-    "vue": "^3.3.x"
+    "vue": "^3.5.x"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.10.4",
-    "@vitejs/plugin-vue": "^5.1.5",
+    "@vitejs/plugin-vue": "^5.2.1",
     "@vue/eslint-config-prettier": "^10.1.0",
-    "eslint": "^9.14.0",
-    "eslint-plugin-vue": "^9.31.0",
-    "prettier": "^3.3.3",
-    "sass": "^1.80.7",
-    "terser": "^5.36.0",
-    "vite": "^5.4.11",
-    "vitepress": "^1.5.0",
-    "@mcistudio/vue-colorpicker": "^2.2.5"
+    "eslint": "^9.17.0",
+    "eslint-plugin-vue": "^9.32.0",
+    "prettier": "^3.4.2",
+    "sass": "^1.83.0",
+    "terser": "^5.37.0",
+    "vite": "^6.0.6",
+    "vitepress": "^1.5.0"
   },
-  "type": "module"
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/colorpicker.es.js",
+      "require": "./dist/colorpicker.umd.js"
+    }
+  }
 }

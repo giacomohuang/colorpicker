@@ -1,5 +1,5 @@
 <template>
-  <div onselectstart="return false" style="position: relative">
+  <div @selectstart.prevent style="position: relative">
     <div class="cbtn" :class="[props.size, { active: isShowPanel }]" @click.stop="isShowPanel = !isShowPanel" ref="cbtnEl">
       <div class="cbtn-inner" :style="{ background: previewBackground }"></div>
     </div>
@@ -110,15 +110,19 @@ if (modebar.value == 'none') {
 }
 
 const gradients = ref(
-  props.modelValue?.color || [
-    { percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } },
-    { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }
-  ]
+  activeMode.value === 'solid'
+    ? []
+    : props.modelValue?.color || [
+        { percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } },
+        { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }
+      ]
 )
 const gradColors = ref([])
-gradients.value.forEach((item, index) => {
-  gradColors.value.push({ id: index, percent: item.percent, color: Utils.rgba2hsba(item.color) })
-})
+if (activeMode.value !== 'solid') {
+  gradients.value.forEach((item, index) => {
+    gradColors.value.push({ id: index, percent: item.percent, color: Utils.rgba2hsba(item.color) })
+  })
+}
 
 let isDragging = false
 let paletteWidth = 216
@@ -585,12 +589,18 @@ function setPickerPos() {
     height: 6px;
     display: block;
     background: rgba(255, 255, 255, 0);
-    box-shadow: 0 0 0 1px #979797, 0 0 0 3px #fff, 0 0 0 4px #979797;
+    box-shadow:
+      0 0 0 1px #979797,
+      0 0 0 3px #fff,
+      0 0 0 4px #979797;
     border-radius: 50%;
     cursor: default;
   }
   &.on::before {
-    box-shadow: 0 0 0 1px #979797, 0 0 0 3px #f50, 0 0 0 4px #979797;
+    box-shadow:
+      0 0 0 1px #979797,
+      0 0 0 3px #f50,
+      0 0 0 4px #979797;
   }
 }
 .dropper {

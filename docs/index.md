@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Vue Colorpicker"
-  tagline: A colorpicker component based on Vue 3.0  
+  tagline: A colorpicker component based on Vue 3
   actions:
     - theme: brand
       text: Guides

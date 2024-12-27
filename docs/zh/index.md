@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Vue Colorpicker"
-  tagline: 基于vue3.0的拾色器组件
+  tagline: 基于vue3的拾色器组件
   actions:
     - theme: brand
       text: 开发指南
