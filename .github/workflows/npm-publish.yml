@@ -7,7 +7,6 @@ on:
       - "packages/colorpicker/**"
       - "package.json"
       - "pnpm-workspace.yaml"
-      - "pnpm-lock.yaml"
 
 jobs:
   build:
