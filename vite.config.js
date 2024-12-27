@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite'
-import path from 'path'
 import vue from '@vitejs/plugin-vue'
-
+import path from 'path'
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [vue()],
@@ -15,9 +14,9 @@ export default defineConfig(({ command }) => {
   if (command === 'build') {
     config.build = {
       lib: {
-        entry: path.resolve(__dirname, './src/main.js'),
+        entry: './src/main.js',
         name: 'ColorPicker',
-        fileName: (format) => `colorpicker.${format}.js`
+        fileName: 'colorpicker'
       },
       rollupOptions: {
         external: ['vue'],
@@ -37,9 +36,9 @@ export default defineConfig(({ command }) => {
     }
   } else {
     // 开发模式配置
-    config.root = path.resolve(__dirname, './src/demo')
+    config.root = './src/demo'
     config.build = {
-      outDir: path.resolve(__dirname, './dist')
+      outDir: './dist'
     }
   }
 

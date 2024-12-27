@@ -161,17 +161,51 @@ watch(isShowPanel, () => {
 function changeMode(mode) {
   activeMode.value = mode
   if (activeMode.value !== 'solid') {
-    setGradPickerPos()
-    setDegreeHanderPos()
-    const c = gradColors.value[activeGradPickerIndex.value].color
-    paletteColor.h = c.h
-    paletteColor.s = c.s
-    paletteColor.b = c.b
-    paletteColor.a = c.a
+    if (!gradColors.value || gradColors.value.length === 0) {
+      gradColors.value = [
+        {
+          id: gradMaxId++,
+          percent: 0,
+          color: {
+            h: paletteColor.h,
+            s: paletteColor.s,
+            b: paletteColor.b,
+            a: paletteColor.a
+          }
+        },
+        {
+          id: gradMaxId++,
+          percent: 100,
+          color: {
+            h: paletteColor.h,
+            s: paletteColor.s,
+            b: paletteColor.b,
+            a: paletteColor.a
+          }
+        }
+      ]
+      activeGradPickerIndex.value = 0
+    }
+
+    nextTick(() => {
+      setGradPickerPos()
+      setDegreeHanderPos()
+      if (gradColors.value && gradColors.value[activeGradPickerIndex.value] && gradColors.value[activeGradPickerIndex.value].color) {
+        const c = gradColors.value[activeGradPickerIndex.value].color
+        paletteColor.h = c.h
+        paletteColor.s = c.s
+        paletteColor.b = c.b
+        paletteColor.a = c.a
+      }
+      setPickerPos()
+      updateGradColor()
+      updatePreviews()
+    })
+  } else {
+    setPickerPos()
+    updateGradColor()
+    updatePreviews()
   }
-  setPickerPos()
-  updateGradColor()
-  updatePreviews()
 }
 
 async function dropColor() {
@@ -261,11 +295,23 @@ function bindDown(el, fnMove, index) {
 
 function addGradPicker() {
   if (gradColors.value.length < 10) {
-    const c = JSON.parse(JSON.stringify(gradColors.value[activeGradPickerIndex.value]))
+    let defaultColor = {
+      id: gradMaxId,
+      percent: 50,
+      color: { h: 0, s: 100, b: 100, a: 1 }
+    }
+
+    const sourceColor = gradColors.value[activeGradPickerIndex.value]
+    let c = sourceColor ? JSON.parse(JSON.stringify(sourceColor)) : defaultColor
+
     c.id = gradMaxId++
     gradColors.value.push(c)
     activeGradPickerIndex.value = gradColors.value.length - 1
-    nextTick(() => getGradPickerPos(gradBarEl.value.children[activeGradPickerIndex.value], activeGradPickerIndex.value))
+    nextTick(() => {
+      if (gradBarEl.value && gradBarEl.value.children[activeGradPickerIndex.value]) {
+        getGradPickerPos(gradBarEl.value.children[activeGradPickerIndex.value], activeGradPickerIndex.value)
+      }
+    })
   }
 }
 
@@ -301,7 +347,7 @@ function setGradPickerPos() {
 }
 
 function updateGradColor() {
-  if (activeMode.value !== 'solid') {
+  if (activeMode.value !== 'solid' && gradColors.value && gradColors.value[activeGradPickerIndex.value] && gradColors.value[activeGradPickerIndex.value].color) {
     gradColors.value[activeGradPickerIndex.value].color.a = paletteColor.a
     gradColors.value[activeGradPickerIndex.value].color.h = paletteColor.h
     gradColors.value[activeGradPickerIndex.value].color.s = paletteColor.s

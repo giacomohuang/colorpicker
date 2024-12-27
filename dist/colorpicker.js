@@ -162,15 +162,17 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
       activeMode.value = "solid";
     }
     const gradients = ref(
-      ((_d = props.modelValue) == null ? void 0 : _d.color) || [
+      activeMode.value === "solid" ? [] : ((_d = props.modelValue) == null ? void 0 : _d.color) || [
         { percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } },
         { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }
       ]
     );
     const gradColors = ref([]);
-    gradients.value.forEach((item, index) => {
-      gradColors.value.push({ id: index, percent: item.percent, color: Utils.rgba2hsba(item.color) });
-    });
+    if (activeMode.value !== "solid") {
+      gradients.value.forEach((item, index) => {
+        gradColors.value.push({ id: index, percent: item.percent, color: Utils.rgba2hsba(item.color) });
+      });
+    }
     let isDragging = false;
     let paletteWidth = 216;
     let paletteHeight = 138;
@@ -202,17 +204,50 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
     function changeMode(mode) {
       activeMode.value = mode;
       if (activeMode.value !== "solid") {
-        setGradPickerPos();
-        setDegreeHanderPos();
-        const c = gradColors.value[activeGradPickerIndex.value].color;
-        paletteColor.h = c.h;
-        paletteColor.s = c.s;
-        paletteColor.b = c.b;
-        paletteColor.a = c.a;
+        if (!gradColors.value || gradColors.value.length === 0) {
+          gradColors.value = [
+            {
+              id: gradMaxId++,
+              percent: 0,
+              color: {
+                h: paletteColor.h,
+                s: paletteColor.s,
+                b: paletteColor.b,
+                a: paletteColor.a
+              }
+            },
+            {
+              id: gradMaxId++,
+              percent: 100,
+              color: {
+                h: paletteColor.h,
+                s: paletteColor.s,
+                b: paletteColor.b,
+                a: paletteColor.a
+              }
+            }
+          ];
+          activeGradPickerIndex.value = 0;
+        }
+        nextTick(() => {
+          setGradPickerPos();
+          setDegreeHanderPos();
+          if (gradColors.value && gradColors.value[activeGradPickerIndex.value] && gradColors.value[activeGradPickerIndex.value].color) {
+            const c = gradColors.value[activeGradPickerIndex.value].color;
+            paletteColor.h = c.h;
+            paletteColor.s = c.s;
+            paletteColor.b = c.b;
+            paletteColor.a = c.a;
+          }
+          setPickerPos();
+          updateGradColor();
+          updatePreviews();
+        });
+      } else {
+        setPickerPos();
+        updateGradColor();
+        updatePreviews();
       }
-      setPickerPos();
-      updateGradColor();
-      updatePreviews();
     }
     async function dropColor() {
       if (!eyeDropper) {
@@ -280,11 +315,21 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
     }
     function addGradPicker() {
       if (gradColors.value.length < 10) {
-        const c = JSON.parse(JSON.stringify(gradColors.value[activeGradPickerIndex.value]));
+        let defaultColor = {
+          id: gradMaxId,
+          percent: 50,
+          color: { h: 0, s: 100, b: 100, a: 1 }
+        };
+        const sourceColor = gradColors.value[activeGradPickerIndex.value];
+        let c = sourceColor ? JSON.parse(JSON.stringify(sourceColor)) : defaultColor;
         c.id = gradMaxId++;
         gradColors.value.push(c);
         activeGradPickerIndex.value = gradColors.value.length - 1;
-        nextTick(() => getGradPickerPos(gradBarEl.value.children[activeGradPickerIndex.value], activeGradPickerIndex.value));
+        nextTick(() => {
+          if (gradBarEl.value && gradBarEl.value.children[activeGradPickerIndex.value]) {
+            getGradPickerPos(gradBarEl.value.children[activeGradPickerIndex.value], activeGradPickerIndex.value);
+          }
+        });
       }
     }
     function delGradPicker() {
@@ -316,7 +361,7 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
       });
     }
     function updateGradColor() {
-      if (activeMode.value !== "solid") {
+      if (activeMode.value !== "solid" && gradColors.value && gradColors.value[activeGradPickerIndex.value] && gradColors.value[activeGradPickerIndex.value].color) {
         gradColors.value[activeGradPickerIndex.value].color.a = paletteColor.a;
         gradColors.value[activeGradPickerIndex.value].color.h = paletteColor.h;
         gradColors.value[activeGradPickerIndex.value].color.s = paletteColor.s;
@@ -581,7 +626,7 @@ const _sfc_main = /* @__PURE__ */ Object.assign(__default__, {
     };
   }
 });
-const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-59360534"]]);
+const ColorPicker = /* @__PURE__ */ _export_sfc(_sfc_main, [["__scopeId", "data-v-09925be3"]]);
 ColorPicker.install = function(app) {
   app.component("ColorPicker", ColorPicker);
 };
