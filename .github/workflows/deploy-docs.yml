@@ -39,6 +39,10 @@ jobs:
         run: pnpm install
       - name: Build colorpicker
         run: pnpm build:deps
+      - name: Check build output
+        run: |
+          ls -la packages/colorpicker/dist
+          cat packages/colorpicker/dist/colorpicker.es.js || echo "File not found"
       - name: Build docs
         run: pnpm --filter @mcistudio/colorpicker-docs docs:build
       - name: Upload artifact
