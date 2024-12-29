@@ -132,7 +132,6 @@ let gradMaxId = 0
 //Eye Dropper (only supports Google Chrome version 95 and above)
 let eyeDropper = null
 if ('EyeDropper' in window) {
-  // eslint-disable-next-line no-undef
   eyeDropper = new EyeDropper()
 } else {
   isDropperEnabled.value = false
