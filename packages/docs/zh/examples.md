@@ -26,7 +26,7 @@ const data6 = ref({
 const data7 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
 
 function changed(color) {
-  console.log('color changed', color)
+  console.log('Color changed', color)
 }
 </script>
 
