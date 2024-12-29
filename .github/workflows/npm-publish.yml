@@ -29,6 +29,9 @@ jobs:
   publish-npm:
     needs: build
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v2
@@ -38,13 +41,18 @@ jobs:
         with:
           node-version: 20
           registry-url: https://registry.npmjs.org/
+          scope: "@mcistudio"
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm install
       - name: Build
         run: pnpm build
+      - name: Update package name
+        working-directory: packages/core
+        run: |
+          npm pkg set name="@mcistudio/vue-colorpicker"
       - name: Publish
         working-directory: packages/core
-        run: pnpm publish --no-git-checks
+        run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
