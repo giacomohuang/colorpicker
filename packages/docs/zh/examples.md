@@ -4,30 +4,30 @@ import ColorPicker from "@colorpicker/core";
 import "@colorpicker/core/dist/style.css";
 import { ref } from 'vue'
 
-// const data1 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
-// const data2 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
-// const data3 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
-// const data4 = ref({mode:'solid',color:{ r: 33, g: 137, b: 216, a: 1 }})
-// const data5 = ref({
-//   mode: 'linear',
-//   degree: 90,
-//   gradients: [
-//     { percent: 10, color: { r: 255, g: 10, b: 20, a: 0.5 } },
-//     { percent: 100, color: { r: 59, g: 50, b: 240, a: 1 } }
-//   ]
-// })
-// const data6 = ref({
-//   mode: 'radial',
-//   gradients: [
-//     { percent: 10, color: { r: 255, g: 10, b: 20, a: 0.5 } },
-//     { percent: 100, color: { r: 59, g: 50, b: 240, a: 1 } }
-//   ]
-// })
-// const data7 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
+const data1 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
+const data2 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
+const data3 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
+const data4 = ref({mode:'solid',color:{ r: 33, g: 137, b: 216, a: 1 }})
+const data5 = ref({
+  mode: 'linear',
+  degree: 90,
+  gradients: [
+    { percent: 10, color: { r: 255, g: 10, b: 20, a: 0.5 } },
+    { percent: 100, color: { r: 59, g: 50, b: 240, a: 1 } }
+  ]
+})
+const data6 = ref({
+  mode: 'radial',
+  gradients: [
+    { percent: 10, color: { r: 255, g: 10, b: 20, a: 0.5 } },
+    { percent: 100, color: { r: 59, g: 50, b: 240, a: 1 } }
+  ]
+})
+const data7 = ref({color:{ r: 33, g: 137, b: 216, a: 1 }})
 
-// function changed(color) {
-//   console.log('color changed', color)
-// }
+function changed(color) {
+  console.log('color changed', color)
+}
 </script>
 
 # 示例
