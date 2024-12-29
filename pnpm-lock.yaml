@@ -50,9 +50,9 @@ importers:
 
   packages/docs:
     dependencies:
-      '@colorpicker/core':
-        specifier: workspace:*
-        version: link:../core
+      '@mcistudio/vue-colorpicker':
+        specifier: 2.3.0
+        version: 2.3.0(vue@3.5.13(typescript@5.7.2))
     devDependencies:
       vitepress:
         specifier: ^1.5.0
@@ -540,6 +540,11 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
+
+  '@mcistudio/vue-colorpicker@2.3.0':
+    resolution: {integrity: sha512-nnLpQOMeEaDS7fl6C+wJlqvwBFDIa56ImuV8J+YEzBalZIraJVlCRiKM3A/uHZ69OYKa+LbnrNM/+FxPFtf7hw==}
+    peerDependencies:
+      vue: ^3.5.x
 
   '@parcel/watcher-android-arm64@2.5.0':
     resolution: {integrity: sha512-qlX4eS28bUcQCdribHkg/herLe+0A9RyYC+mm2PXpncit8z5b3nSqGVzMNR3CmtAOgRutiZ02eIJJgP/b1iEFQ==}
@@ -1994,6 +1999,10 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  '@mcistudio/vue-colorpicker@2.3.0(vue@3.5.13(typescript@5.7.2))':
+    dependencies:
+      vue: 3.5.13(typescript@5.7.2)
 
   '@parcel/watcher-android-arm64@2.5.0':
     optional: true
