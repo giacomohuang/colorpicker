@@ -26,28 +26,29 @@ npm i @mcistudio/vue-colorpicker
 ```
 
 ### 使用说明
-#### 全局注册模式
-main.js
-```javascript
 
-import ColorPicker from '@mcistudio/vue-colorpicker'
-import '@mcistudio/vue-colorpicker/style.css'
-createApp(App)
-  .use(ColorPicker)
-  .mount("#app");
+#### 全局注册模式
+
+main.js
+
+```javascript
+import ColorPicker from "@mcistudio/vue-colorpicker";
+import "@mcistudio/vue-colorpicker/style.css";
+createApp(App).use(ColorPicker).mount("#app");
 ```
+
 ##### 或
 
 #### 局部注册模式
+
 HelloWorld.vue
+
 ```vue
 <script setup>
-import ColorPicker from '@mcistudio/vue-colorpicker'
-import '@mcistudio/vue-colorpicker/dist/style.css'
+import ColorPicker from "@mcistudio/vue-colorpicker";
 
 <template>
   <ColorPicker></ColorPicker>
-</template>
-
+</template>;
 </script>
 ```

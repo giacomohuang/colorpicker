@@ -9,25 +9,37 @@ export default defineConfig(({ command }) => {
       alias: {
         '@': path.resolve(__dirname, './src')
       }
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          charset: false
+        }
+      }
     }
   }
 
   if (command === 'build') {
     config.build = {
       lib: {
-        entry: path.resolve(__dirname, './src/main.js'),
+        entry: 'src/main.js',
         name: 'ColorPicker',
         fileName: (format) => `colorpicker.${format}.js`,
-        formats: ['es', 'umd']
+        formats: ['es', 'umd', 'cjs']
       },
       rollupOptions: {
         external: ['vue'],
         output: {
           globals: {
             vue: 'Vue'
+          },
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name.endsWith('.css')) return 'style.css'
+            return assetInfo.name
           }
         }
       },
+      cssCodeSplit: false,
       minify: 'terser',
       terserOptions: {
         compress: {

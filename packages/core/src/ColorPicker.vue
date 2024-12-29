@@ -112,7 +112,7 @@ if (modebar.value == 'none') {
 const gradients = ref(
   activeMode.value === 'solid'
     ? []
-    : props.modelValue?.color || [
+    : props.modelValue?.gradients || [
         { percent: 0, color: { r: 255, g: 255, b: 255, a: 1 } },
         { percent: 100, color: { r: 0, g: 0, b: 0, a: 1 } }
       ]
@@ -376,9 +376,7 @@ function updatePreviews() {
   emitVal.mode = activeMode.value
   switch (activeMode.value) {
     case 'solid':
-      // emitVal.hsba = paletteColor
       emitVal.color = Utils.hsb2rgb(paletteColor)
-      // console.log(emitVal.rgba)
       emitVal.hex = Utils.rgba2hex(emitVal.color)
       break
     case 'linear':
@@ -386,14 +384,14 @@ function updatePreviews() {
       previewBackground.value = `linear-gradient(${degree.value}deg${gradStr}),url('${maskImgUrl}')`
       gradStyleStr = `background-image:linear-gradient(${degree.value}deg${gradStr})`
       emitVal.degree = degree.value
-      emitVal.color = gradArr
+      emitVal.gradients = gradArr
       emitVal.css = gradStyleStr
       break
     case 'radial':
       gradPreviewColor.value = `linear-gradient(to right,${gradStr.slice(1)}),url('${maskImgUrl}')`
       previewBackground.value = `radial-gradient(${gradStr.slice(1)}),url('${maskImgUrl}')`
       gradStyleStr = `background-image:radial-gradient(${gradStr.slice(1)})`
-      emitVal.color = gradArr
+      emitVal.gradients = gradArr
       emitVal.css = gradStyleStr
       break
   }

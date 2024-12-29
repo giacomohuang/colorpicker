@@ -1,6 +1,7 @@
 # Guides
 
 ## Overview
+
 - Supports 3 CSS background color modes: `solid`, `linear-gradient` and `radial-gradient`.
 - Supports color opacity(alpha) adjustment.
 - Supports gradient bar control, easily drag/add/delete the control points.
@@ -22,119 +23,122 @@ npm i @mcistudio/vue-colorpicker
 - **Global Registration**
 
 ```javascript
-import ColorPicker from '@mcistudio/vue-colorpicker'
-import '@mcistudio/vue-colorpicker/style.css'
-createApp(App)
-  .use(ColorPicker)
-  .mount("#app");
+import ColorPicker from "@mcistudio/vue-colorpicker";
+import "@mcistudio/vue-colorpicker/dist/style.css";
+createApp(App).use(ColorPicker).mount("#app");
 ```
+
 - **Local Registration**
+
 ```vue
 <script setup>
-import ColorPicker from '@mcistudio/vue-colorpicker'
-import '@mcistudio/vue-colorpicker/dist/style.css'
+import ColorPicker from "@mcistudio/vue-colorpicker";
+import "@mcistudio/vue-colorpicker/dist/style.css";
 
 <template>
   <ColorPicker></ColorPicker>
-</template>
+</template>;
 </script>
 ```
 
 ## Props
 
-| Prop Name | Description                         | Type   | Accepted Value | Default Value | Required |
-| --------- | ----------------------------------- | ------ | -------------- | ------------- | -------- |
-| v-model   | binding value                  | JSON | `<v-model>`      |         | No       |
-| modebar   | show mode bar                       | String | show<br/>none  | show          | No       |
-| size      | button size | String | small<br/>medium<br />large | medium | No |
+| Prop Name | Description   | Type   | Accepted Value              | Default Value | Required |
+| --------- | ------------- | ------ | --------------------------- | ------------- | -------- |
+| v-model   | binding value | JSON   | `<v-model>`                 |               | No       |
+| modebar   | show mode bar | String | show<br/>none               | show          | No       |
+| size      | button size   | String | small<br/>medium<br />large | medium        | No       |
 
 `v-model`
 
-|  | Description                         | Type       | Accepted Value                         | Default Value                                                | Required |
-| --------- | ----------------------------------- | ---------- | --------------------------------------- | ------------------------------------------------------------ | -------- |
-| mode      | color mode                          | String     | solid<br />linear<br />radial<br /> | solid                                                        | No       |
-| color     | rgba color value in solid mode      | String     | -                                       | \{ r: 0, g: 0, b: 0, a: 1 \}                                   | No       |
-| hex | Hex color value in solid mode (Read Only) | String | - | - | No |
-| degree    | drgee value in Linear-gradient mode | Number     | -                                       | 90                                                           | No       |
-| gradients | gradient list<br />                 | JSON Array | -                                       | [<br />  { <br />    percent: 0, <br />    color: { r: 255, g: 255, b: 255, a: 1 }<br />   }<br />   { <br />    percent: 100, <br />    color: { r: 0, g: 0, b: 0, a: 1 } <br />  }<br />]``` | No       |
+|           | Description                               | Type       | Accepted Value                      | Default Value                                                                                                                                                                | Required |
+| --------- | ----------------------------------------- | ---------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| mode      | color mode                                | String     | solid<br />linear<br />radial<br /> | solid                                                                                                                                                                        | No       |
+| color     | rgba color value in solid mode            | String     | -                                   | \{ r: 0, g: 0, b: 0, a: 1 \}                                                                                                                                                 | No       |
+| hex       | Hex color value in solid mode (Read Only) | String     | -                                   | -                                                                                                                                                                            | No       |
+| degree    | drgee value in Linear-gradient mode       | Number     | -                                   | 90                                                                                                                                                                           | No       |
+| gradients | gradient list<br />                       | JSON Array | -                                   | [<br /> { <br /> percent: 0, <br /> color: { r: 255, g: 255, b: 255, a: 1 }<br /> }<br /> { <br /> percent: 100, <br /> color: { r: 0, g: 0, b: 0, a: 1 } <br /> }<br />]``` | No       |
 
 ## Events
 
-| event Name   | Description | Parameters |
-| ------------ | ----------- | ---------- |
-| colorChanged | Triggered when color changes | returnValue|
+| event Name   | Description                  | Parameters  |
+| ------------ | ---------------------------- | ----------- |
+| colorChanged | Triggered when color changes | returnValue |
 
 ###### `returnValue` examples:
 
 **Solid Mode**
+
 ```json
 {
-    "mode": "solid",
-    "color": {
-        "r": 0,
-        "g": 0,
-        "b": 0,
-        "a": 1
-    },
-  	"hex":'#000000',
-    "css": "background-color:rgba(0,0,0,1)"
+  "mode": "solid",
+  "color": {
+    "r": 0,
+    "g": 0,
+    "b": 0,
+    "a": 1
+  },
+  "hex": "#000000",
+  "css": "background-color:rgba(0,0,0,1)"
 }
 ```
 
 **Linear Mode**
+
 ```json
 {
-    "mode": "linear",
-    "degree": 90,
-    "color": [
-        {
-            "percent": 0,
-            "color": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 1
-            }
-        },
-        {
-            "percent": 100,
-            "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 1
-            }
-        }
-    ],
-    "css": "background-image:linear-gradient(90deg,rgba(255,255,255,1) 0%,rgba(0,0,0,1) 100%)"
+  "mode": "linear",
+  "degree": 90,
+  "color": [
+    {
+      "percent": 0,
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 1
+      }
+    },
+    {
+      "percent": 100,
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 1
+      }
+    }
+  ],
+  "css": "background-image:linear-gradient(90deg,rgba(255,255,255,1) 0%,rgba(0,0,0,1) 100%)"
 }
 ```
 
 **Radial Mode**
+
 ```json
 {
-    "mode": "radial",
-    "color": [
-        {
-            "percent": 0,
-            "color": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 1
-            }
-        },
-        {
-            "percent": 100,
-            "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 1
-            }
-        }
-    ],
-    "css": "background-image:radial-gradient(rgba(255,255,255,1) 0%,rgba(0,0,0,1) 100%)"
+  "mode": "radial",
+  "color": [
+    {
+      "percent": 0,
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 1
+      }
+    },
+    {
+      "percent": 100,
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 1
+      }
+    }
+  ],
+  "css": "background-image:radial-gradient(rgba(255,255,255,1) 0%,rgba(0,0,0,1) 100%)"
 }
 ```
 

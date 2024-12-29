@@ -1,11 +1,11 @@
 {
-  "name": "@colorpicker/libs",
+  "name": "@colorpicker/core",
   "author": "Huang Jia <giacomohuang@qq.com>",
   "homepage": "https://giacomohuang.github.io/colorpicker/zh",
   "bugs": {
     "url": "https://github.com/giacomohuang/colorpicker/issues"
   },
-  "version": "2.2.14",
+  "version": "2.3.0",
   "keywords": [
     "vuejs",
     "vue",
@@ -19,6 +19,7 @@
   "private": false,
   "module": "dist/colorpicker.es.js",
   "main": "dist/colorpicker.umd.js",
+  "style": "dist/style.css",
   "files": [
     "dist/**/*"
   ],
@@ -52,6 +53,7 @@
     ".": {
       "import": "./dist/colorpicker.es.js",
       "require": "./dist/colorpicker.umd.js"
-    }
+    },
+    "./dist/style.css": "./dist/style.css"
   }
 }

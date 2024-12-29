@@ -1,6 +1,7 @@
 # 开发指南
 
 ## 概览
+
 - 支持3种CSS背景颜色模式：`solid`，`linear-gradient` 和 `radial-gradient`。
 - 支持颜色的不透明度（alpha）调整。
 - 支持梯度条控制，轻松拖动/添加/删除控制点。
@@ -22,23 +23,24 @@ npm i @mcistudio/vue-colorpicker
 - **全局注册**
 
 ```javascript
-import ColorPicker from '@mcistudio/vue-colorpicker'
-import '@mcistudio/vue-colorpicker/style.css'
-createApp(App)
-  .use(ColorPicker)
-  .mount("#app");
+import ColorPicker from "@mcistudio/vue-colorpicker";
+import "@mcistudio/vue-colorpicker/dist/style.css";
+createApp(App).use(ColorPicker).mount("#app");
 ```
+
 - **局部注册**
+
 ```vue
 <script setup>
-import ColorPicker from '@mcistudio/vue-colorpicker'
-import '@mcistudio/vue-colorpicker/dist/style.css'
+import ColorPicker from "@mcistudio/vue-colorpicker";
+import "@mcistudio/vue-colorpicker/dist/style.css";
 
 <template>
   <ColorPicker></ColorPicker>
-</template>
+</template>;
 </script>
 ```
+
 ### Props 参数
 
 | 参数名  | 描述               | 数据类型 | 允许值                      | 默认值 | 是否必填 |
@@ -49,24 +51,24 @@ import '@mcistudio/vue-colorpicker/dist/style.css'
 
 `<v-model>`
 
-| 参数名 | 描述                         | 数据类型       | 允许值                        | 默认值                                               | 是否必填 |
-| --------- | ----------------------------------- | ---------- | --------------------------------------- | ------------------------------------------------------------ | -------- |
-| mode      | 模式                          | String     | solid<br />linear<br />radial<br /> | solid                                                        | No       |
-| color     | 色值(rgba格式)，仅在solid模式中生效      | String     | -                                       | \{ r: 0, g: 0, b: 0, a: 1 \}                                   | No       |
-| hex | 色值(hex格式)，仅在solid模式中生效，只读 | String | - | - | No |
-| degree    | 渐变色角度，仅在linear-gradient模式中生效 | Number     | -                                       | 90                                                           | No       |
-| gradients | 渐变色值列表，仅在linear-gradient和radial-gradient模式中生效<br />                 | JSON Array | -                                       | [<br />{<br />percent: 0, <br />color: { r: 255, g: 255, b: 255, a: 1 \}<br />   \}<br />   \{ <br />percent: 100, <br />color: \{ r: 0, g: 0, b: 0, a: 1 <br />\} <br />  \}<br />] | No       |
-
+| 参数名    | 描述                                                               | 数据类型   | 允许值                              | 默认值                                                                                                                                                                          | 是否必填 |
+| --------- | ------------------------------------------------------------------ | ---------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
+| mode      | 模式                                                               | String     | solid<br />linear<br />radial<br /> | solid                                                                                                                                                                           | No       |
+| color     | 色值(rgba格式)，仅在solid模式中生效                                | String     | -                                   | \{ r: 0, g: 0, b: 0, a: 1 \}                                                                                                                                                    | No       |
+| hex       | 色值(hex格式)，仅在solid模式中生效，只读                           | String     | -                                   | -                                                                                                                                                                               | No       |
+| degree    | 渐变色角度，仅在linear-gradient模式中生效                          | Number     | -                                   | 90                                                                                                                                                                              | No       |
+| gradients | 渐变色值列表，仅在linear-gradient和radial-gradient模式中生效<br /> | JSON Array | -                                   | [<br />{<br />percent: 0, <br />color: { r: 255, g: 255, b: 255, a: 1 \}<br /> \}<br /> \{ <br />percent: 100, <br />color: \{ r: 0, g: 0, b: 0, a: 1 <br />\} <br /> \}<br />] | No       |
 
 ### Events 事件
 
-| 事件名称   | 描述 | 返回参数 |
-| ------------ | ----------- | ---------- |
-| colorChanged | 当颜色值、渐变色角度发生变化时触发本事件 | returnValue|
+| 事件名称     | 描述                                     | 返回参数    |
+| ------------ | ---------------------------------------- | ----------- |
+| colorChanged | 当颜色值、渐变色角度发生变化时触发本事件 | returnValue |
 
 ###### `returnValue` examples:
 
 **Solid Mode**
+
 ```JSON
 {
     "mode": "solid",
@@ -82,6 +84,7 @@ import '@mcistudio/vue-colorpicker/dist/style.css'
 ```
 
 **Linear Mode**
+
 ```JSON
 {
     "mode": "linear",
@@ -111,6 +114,7 @@ import '@mcistudio/vue-colorpicker/dist/style.css'
 ```
 
 **Radial Mode**
+
 ```JSON
 {
     "mode": "radial",

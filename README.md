@@ -1,8 +1,9 @@
-a Vue3.x based colorpicker component. 
+a Vue3.x based colorpicker component.
 
 [Guides & Examples](https://giacomohuang.github.io/colorpicker) | [文档和示例](https://giacomohuang.github.io/colorpicker/zh)
 
 ## Features
+
 - Supports 3 CSS background color modes: `solid`, `linear-gradient` and `radial-gradient`.
 - Supports color opacity(alpha) adjustment.
 - Supports gradient bar control, easily drag/add/delete the control points.
@@ -25,28 +26,29 @@ npm i @mcistudio/vue-colorpicker
 ```
 
 ### How to Use
-#### Global Registration
-main.js
-```javascript
 
-import ColorPicker from '@mcistudio/vue-colorpicker'
-import '@mcistudio/vue-colorpicker/style.css'
-createApp(App)
-  .use(ColorPicker)
-  .mount("#app");
+#### Global Registration
+
+main.js
+
+```javascript
+import ColorPicker from "@mcistudio/vue-colorpicker";
+import "@mcistudio/vue-colorpicker/style.css";
+createApp(App).use(ColorPicker).mount("#app");
 ```
+
 ##### OR
 
 #### Local Registration
+
 HelloWorld.vue
+
 ```vue
 <script setup>
-import ColorPicker from '@mcistudio/vue-colorpicker'
-import '@mcistudio/vue-colorpicker/dist/style.css'
+import ColorPicker from "@mcistudio/vue-colorpicker";
 
 <template>
   <ColorPicker></ColorPicker>
-</template>
-
+</template>;
 </script>
 ```

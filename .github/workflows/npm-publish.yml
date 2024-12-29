@@ -44,7 +44,7 @@ jobs:
       - name: Build
         run: pnpm build
       - name: Publish
-        working-directory: packages/libs
+        working-directory: packages/core
         run: pnpm publish --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
