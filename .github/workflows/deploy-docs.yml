@@ -5,7 +5,7 @@ on:
     branches: [master]
     paths:
       - "packages/docs/**"
-      - "packages/colorpicker/**"
+      - "packages/core/**"
       - "package.json"
       - "pnpm-workspace.yaml"
   workflow_dispatch:
@@ -25,22 +25,34 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - uses: pnpm/action-setup@v2
         with:
           version: 8
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: "pnpm"
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
+
       - name: Install dependencies
         run: pnpm install
-      - name: Build colorpicker Docs
+        continue-on-error: false
+
+      - name: Build colorpicker dependencies
         run: pnpm build:deps
+        continue-on-error: false
+
       - name: Build docs
         run: pnpm --filter @colorpicker/docs docs:build
+        continue-on-error: false
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:

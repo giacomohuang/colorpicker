@@ -4,7 +4,7 @@ on:
   push:
     branches: [master]
     paths:
-      - "packages/libs/**"
+      - "packages/core/**"
       - "package.json"
       - "pnpm-workspace.yaml"
       - "pnpm-lock.yaml"
