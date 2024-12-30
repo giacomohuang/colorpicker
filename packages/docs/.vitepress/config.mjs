@@ -23,21 +23,10 @@ export default defineConfig({
           {
             text: "Guides",
             link: "/guides",
-            // items: [
-            //   { text: 'Overview', link: '/guides#overview' },
-            //   { text: 'Installation', link: '/guides#installation' },
-            //   { text: 'How to Use', link: '/guides#how-to-use' },
-            //   { text: 'Props', link: '/guides#props' },
-            //   { text: 'Events', link: '/guides#events' }
-            // ]
           },
           {
             text: "Examples",
             link: "/examples",
-            // items: [
-            //   { text: 'Props', link: '/examples' },
-            //   { text: 'Events', link: '/examples#events' }
-            // ]
           },
         ],
 
@@ -65,21 +54,10 @@ export default defineConfig({
           {
             text: "开发指南",
             link: "/zh/guides",
-            // items: [
-            //   { text: 'Overview', link: '/guides#overview' },
-            //   { text: 'Installation', link: '/guides#installation' },
-            //   { text: 'How to Use', link: '/guides#how-to-use' },
-            //   { text: 'Props', link: '/guides#props' },
-            //   { text: 'Events', link: '/guides#events' }
-            // ]
           },
           {
             text: "示例",
             link: "/zh/examples",
-            // items: [
-            //   { text: 'Props', link: '/examples' },
-            //   { text: 'Events', link: '/examples#events' }
-            // ]
           },
         ],
 
