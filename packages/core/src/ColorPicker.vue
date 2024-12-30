@@ -6,9 +6,9 @@
 
     <div class="panel" v-show="isShowPanel" ref="panelEl" @contextmenu.prevent="bindContext">
       <div class="active-mode-wrapper" :style="{ display: modebar }">
-        <div title="solid" class="btn-active-mode solid" :class="{ gray: activeMode === 'solid' }" @click.stop="changeMode('solid')"></div>
-        <div title="linear" class="btn-active-mode linear" :class="{ gray: activeMode === 'linear' }" @click.stop="changeMode('linear')"></div>
-        <div title="radial" class="btn-active-mode radial" :class="{ gray: activeMode === 'radial' }" @click.stop="changeMode('radial')"></div>
+        <div title="solid" class="btn-active-mode solid" :class="{ gray: activeMode !== 'solid' }" @click.stop="changeMode('solid')"></div>
+        <div title="linear" class="btn-active-mode linear" :class="{ gray: activeMode !== 'linear' }" @click.stop="changeMode('linear')"></div>
+        <div title="radial" class="btn-active-mode radial" :class="{ gray: activeMode !== 'radial' }" @click.stop="changeMode('radial')"></div>
       </div>
       <div class="grad-wrapper" :style="activeMode === 'solid' ? 'display:none' : ''">
         <div class="grad-bar" ref="gradBarEl" :style="{ backgroundImage: gradPreviewColor }" @click.stop="addGradPicker()">
@@ -376,7 +376,7 @@ function updatePreviews() {
   switch (activeMode.value) {
     case 'solid':
       emitVal.color = Utils.hsb2rgb(paletteColor)
-      emitVal.hex = Utils.rgba2hex(emitVal.color)
+      // emitVal.hex = Utils.rgba2hex(emitVal.color)
       break
     case 'linear':
       gradPreviewColor.value = `linear-gradient(to right,${gradStr.slice(1)}),url('${maskImgUrl}')`

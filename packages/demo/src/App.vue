@@ -4,6 +4,11 @@
     <div class="picker-container">
       <ColorPicker v-model="color" />
       <div class="color-value">
+        <code>
+          <pre>{{ JSON.stringify(color, null, 2) }}</pre>
+        </code>
+      </div>
+      <div class="color-value">
         <div>模式：{{ color.mode }}</div>
         <template v-if="color.mode === 'solid'">
           <div>HEX：{{ color.hex }}</div>
@@ -27,30 +32,31 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import ColorPicker from '@/ColorPicker.vue'
+import { ref, computed } from "vue";
+import ColorPicker from "@colorpicker/core";
+import "@colorpicker/core/dist/style.css";
 
 const color = ref({
-  mode: 'solid',
+  mode: "solid",
   color: {
-    r: 255,
-    g: 255,
-    b: 255,
-    a: 1
-  }
-})
+    r: 12,
+    g: 134,
+    b: 123,
+    a: 1,
+  },
+});
 
 const getPreviewStyle = computed(() => {
-  if (color.value.mode === 'solid') {
+  if (color.value.mode === "solid") {
     return {
-      background: `rgba(${color.value.color.r}, ${color.value.color.g}, ${color.value.color.b}, ${color.value.color.a})`
-    }
+      background: `rgba(${color.value.color.r}, ${color.value.color.g}, ${color.value.color.b}, ${color.value.color.a})`,
+    };
   } else {
     return {
-      backgroundImage: color.value.css?.split(':')[1] || ''
-    }
+      backgroundImage: color.value.css?.split(":")[1] || "",
+    };
   }
-})
+});
 </script>
 
 <style scoped>
@@ -72,6 +78,7 @@ h1 {
 }
 
 .color-value {
+  text-align: left;
   font-size: 14px;
   color: #666;
   margin-top: 10px;
@@ -79,7 +86,7 @@ h1 {
   padding: 15px;
   border-radius: 8px;
   width: 100%;
-  max-width: 500px;
+  max-width: 1000px;
 }
 
 .color-value > div {
@@ -91,6 +98,6 @@ h1 {
   height: 100px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  background-image: url('./assets/img/optmask.png');
+  background-image: url("./assets/img/optmask.png");
 }
 </style>

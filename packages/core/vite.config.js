@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import path from 'path'
 import vue from '@vitejs/plugin-vue'
 
-export default defineConfig(({ command }) => {
+export default defineConfig(() => {
   const config = {
     plugins: [vue()],
     resolve: {
@@ -16,11 +16,8 @@ export default defineConfig(({ command }) => {
           charset: false
         }
       }
-    }
-  }
-
-  if (command === 'build') {
-    config.build = {
+    },
+    build: {
       lib: {
         entry: 'src/main.js',
         name: 'ColorPicker',
@@ -47,12 +44,6 @@ export default defineConfig(({ command }) => {
           drop_debugger: true
         }
       }
-    }
-  } else {
-    // 开发模式配置
-    config.root = path.resolve(__dirname, './src/demo')
-    config.build = {
-      outDir: path.resolve(__dirname, './dist')
     }
   }
 

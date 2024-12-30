@@ -43,10 +43,10 @@ jobs:
           registry-url: https://registry.npmjs.org/
           scope: "@mcistudio"
           cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm install
-      - name: Build
-        run: pnpm build
+      # - name: Install dependencies
+      #   run: pnpm install
+      # - name: Build
+      #   run: pnpm build
       - name: Update package name
         working-directory: packages/core
         run: |
