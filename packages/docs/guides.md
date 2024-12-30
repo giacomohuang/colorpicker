@@ -2,11 +2,14 @@
 
 ## Overview
 
-- Supports 3 CSS background color modes: `solid`, `linear-gradient` and `radial-gradient`.
-- Supports color opacity(alpha) adjustment.
-- Supports gradient bar control, easily drag/add/delete the control points.
-- The EyeDropper can quickly pick any color from your screen. （supports Google Chrome version 95+）
-- Supports live preview.
+Vue Colorpicker is a powerful color selection component that offers:
+
+- Three CSS background color modes: `solid`, `linear-gradient`, and `radial-gradient`
+- Full HSV color space support with alpha channel control
+- Interactive gradient control with drag-and-drop color stops
+- Built-in EyeDropper API integration (Chrome 95+)
+- Real-time preview with CSS output
+- Responsive design with three size options
 
 ![screenshot01](/screenshot01.png)
 ![screenshot02](/screenshot02.png)
@@ -18,54 +21,55 @@
 npm i @mcistudio/vue-colorpicker
 ```
 
-## How to Use
+## Usage
 
-- **Global Registration**
+### Global Registration
 
 ```javascript
 import ColorPicker from "@mcistudio/vue-colorpicker";
 import "@mcistudio/vue-colorpicker/dist/style.css";
+
 createApp(App).use(ColorPicker).mount("#app");
 ```
 
-- **Local Registration**
+### Local Registration
 
 ```vue
 <script setup>
 import ColorPicker from "@mcistudio/vue-colorpicker";
 import "@mcistudio/vue-colorpicker/dist/style.css";
+</script>
 
 <template>
-  <ColorPicker></ColorPicker>
-</template>;
-</script>
+  <ColorPicker v-model="color"></ColorPicker>
+</template>
 ```
 
 ## Props
 
-| Prop Name | Description   | Type   | Accepted Value              | Default Value | Required |
-| --------- | ------------- | ------ | --------------------------- | ------------- | -------- |
-| v-model   | binding value | JSON   | `<v-model>`                 |               | No       |
-| modebar   | show mode bar | String | show<br/>none               | show          | No       |
-| size      | button size   | String | small<br/>medium<br />large | medium        | No       |
+| Prop Name | Description         | Type   | Accepted Values            | Default  | Required |
+| --------- | ------------------- | ------ | -------------------------- | -------- | -------- |
+| v-model   | Color value object  | Object | See v-model format below   | -        | No       |
+| modebar   | Mode bar visibility | String | 'show', 'none'             | 'show'   | No       |
+| size      | Component size      | String | 'small', 'medium', 'large' | 'medium' | No       |
 
-`v-model`
+### v-model Format
 
-|           | Description                               | Type       | Accepted Value                      | Default Value                                                                                                                                                                | Required |
-| --------- | ----------------------------------------- | ---------- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| mode      | color mode                                | String     | solid<br />linear<br />radial<br /> | solid                                                                                                                                                                        | No       |
-| color     | rgba color value in solid mode            | String     | -                                   | \{ r: 0, g: 0, b: 0, a: 1 \}                                                                                                                                                 | No       |
-| hex       | Hex color value in solid mode (Read Only) | String     | -                                   | -                                                                                                                                                                            | No       |
-| degree    | drgee value in Linear-gradient mode       | Number     | -                                   | 90                                                                                                                                                                           | No       |
-| gradients | gradient list<br />                       | JSON Array | -                                   | [<br /> { <br /> percent: 0, <br /> color: { r: 255, g: 255, b: 255, a: 1 }<br /> }<br /> { <br /> percent: 100, <br /> color: { r: 0, g: 0, b: 0, a: 1 } <br /> }<br />]``` | No       |
+| Property  | Description                             | Type   | Accepted Values                | Default                                                                                                              | Required |
+| --------- | --------------------------------------- | ------ | ------------------------------ | -------------------------------------------------------------------------------------------------------------------- | -------- |
+| mode      | Color mode                              | String | 'solid', 'linear', 'radial'    | 'solid'                                                                                                              | No       |
+| color     | RGBA color object (solid mode)          | Object | \{ r, g, b, a \}               | \{ r: 0, g: 0, b: 0, a: 1 \}                                                                                         | No       |
+| hex       | Hex color value (solid mode, read-only) | String | -                              | -                                                                                                                    | No       |
+| degree    | Gradient angle (linear mode)            | Number | 0-360                          | 90                                                                                                                   | No       |
+| gradients | Gradient stops array                    | Array  | Array of gradient stop objects | [\{ percent: 0, color: \{ r: 255, g: 255, b: 255, a: 1 \}\}, \{ percent: 100, color: \{ r: 0, g: 0, b: 0, a: 1 \}\}] | No       |
 
 ## Events
 
-| event Name   | Description                  | Parameters  |
-| ------------ | ---------------------------- | ----------- |
-| colorChanged | Triggered when color changes | returnValue |
+| Event Name   | Description                | Parameters         |
+| ------------ | -------------------------- | ------------------ |
+| colorChanged | Triggered on color changes | Color value object |
 
-###### `returnValue` examples:
+### Return Value Examples
 
 **Solid Mode**
 
@@ -89,7 +93,7 @@ import "@mcistudio/vue-colorpicker/dist/style.css";
 {
   "mode": "linear",
   "degree": 90,
-  "color": [
+  "gradients": [
     {
       "percent": 0,
       "color": {
@@ -118,7 +122,7 @@ import "@mcistudio/vue-colorpicker/dist/style.css";
 ```json
 {
   "mode": "radial",
-  "color": [
+  "gradients": [
     {
       "percent": 0,
       "color": {

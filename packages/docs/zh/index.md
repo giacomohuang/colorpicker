@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Vue Colorpicker"
-  tagline: 基于vue3的拾色器组件
+  tagline: 功能强大且灵活的 Vue 3 颜色选择器组件
   actions:
     - theme: brand
       text: 开发指南
@@ -17,12 +17,12 @@ hero:
     width: 120
     height: 120
 features:
-  - title: 丰富的配置
-    details: "支持3种背景颜色模式 (solid / linear / radial )、透明度、渐变控制"
-  - title: 所见即所得
-    details: 支持实时预览配色和渐变效果，所见即所得
-  - title: 取色器
-    details: 通过取色器可以快速从你的屏幕上提取任何颜色。（支持谷歌浏览器95版本以上）
+  - title: 多种颜色模式
+    details: 支持纯色、线性渐变和径向渐变，可完全控制渐变节点和角度
+  - title: 高级控制
+    details: 直观的 HSV 色彩空间选择、透明度控制和渐变节点管理
+  - title: 现代特性
+    details: 内置屏幕取色器支持（Chrome 95+）、实时预览和响应式设计
 ---
 
 <style>
