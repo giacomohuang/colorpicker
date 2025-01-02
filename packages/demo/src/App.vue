@@ -8,6 +8,7 @@
           <pre>{{ JSON.stringify(color, null, 2) }}</pre>
         </code>
       </div>
+      <button @click="setColor">Set Color</button>
       <div class="color-value">
         <div>模式：{{ color.mode }}</div>
         <template v-if="color.mode === 'solid'">
@@ -45,6 +46,16 @@ const color = ref({
     a: 1,
   },
 });
+
+const setColor = () => {
+  color.value.mode = "solid";
+  color.value.color = {
+    r: 1,
+    g: 13,
+    b: 12,
+    a: 0.5,
+  };
+};
 
 const getPreviewStyle = computed(() => {
   if (color.value.mode === "solid") {
