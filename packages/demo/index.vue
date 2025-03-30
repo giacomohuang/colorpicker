@@ -28,14 +28,15 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import ColorPicker from '@/ColorPicker.vue'
+import ColorPicker from '@colorpicker/core'
+import '@colorpicker/core/dist/style.css'
 
 const color = ref({
   mode: 'solid',
   color: {
-    r: 255,
-    g: 255,
-    b: 255,
+    r: 200,
+    g: 200,
+    b: 200,
     a: 1
   }
 })
