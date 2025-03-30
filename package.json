@@ -2,7 +2,7 @@
   "name": "colorpicker-monorepo",
   "private": true,
   "scripts": {
-    "dev": "pnpm -F @colorpicker/core dev",
+    "demo": "pnpm build:deps && pnpm -F @colorpicker/demo dev",
     "dev:docs": "pnpm build:deps && pnpm -F @colorpicker/docs docs:dev",
     "build:docs": "pnpm build:deps && pnpm -F @colorpicker/docs docs:build",
     "dev:demo": "pnpm build:deps && pnpm -F @colorpicker/demo dev",

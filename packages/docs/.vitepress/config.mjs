@@ -23,21 +23,10 @@ export default defineConfig({
           {
             text: "Guides",
             link: "/guides",
-            // items: [
-            //   { text: 'Overview', link: '/guides#overview' },
-            //   { text: 'Installation', link: '/guides#installation' },
-            //   { text: 'How to Use', link: '/guides#how-to-use' },
-            //   { text: 'Props', link: '/guides#props' },
-            //   { text: 'Events', link: '/guides#events' }
-            // ]
           },
           {
             text: "Examples",
             link: "/examples",
-            // items: [
-            //   { text: 'Props', link: '/examples' },
-            //   { text: 'Events', link: '/examples#events' }
-            // ]
           },
         ],
 
@@ -65,24 +54,71 @@ export default defineConfig({
           {
             text: "开发指南",
             link: "/zh/guides",
-            // items: [
-            //   { text: 'Overview', link: '/guides#overview' },
-            //   { text: 'Installation', link: '/guides#installation' },
-            //   { text: 'How to Use', link: '/guides#how-to-use' },
-            //   { text: 'Props', link: '/guides#props' },
-            //   { text: 'Events', link: '/guides#events' }
-            // ]
           },
           {
             text: "示例",
             link: "/zh/examples",
-            // items: [
-            //   { text: 'Props', link: '/examples' },
-            //   { text: 'Events', link: '/examples#events' }
-            // ]
           },
         ],
 
+        socialLinks: [{ icon: "github", link: "https://github.com/giacomohuang/colorpicker/" }],
+        footer: {
+          message: "Released under the MIT License.",
+          copyright: "Copyright © 2022-present, Giacomo Huang, MCI Studio",
+        },
+      },
+    },
+    ja: {
+      label: "日本語",
+      lang: "ja-JP",
+      title: "Vue Colorpicker",
+      description: "Vue3.0ベースのカラーピッカーコンポーネント",
+      themeConfig: {
+        logo: { src: "/logo.png", width: 24, height: 24 },
+        nav: [
+          { text: "ホーム", link: "/ja/" },
+          { text: "ガイド", link: "/ja/guides" },
+          { text: "例", link: "/ja/examples" },
+        ],
+        sidebar: [
+          {
+            text: "ガイド",
+            link: "/ja/guides",
+          },
+          {
+            text: "例",
+            link: "/ja/examples",
+          },
+        ],
+        socialLinks: [{ icon: "github", link: "https://github.com/giacomohuang/colorpicker/" }],
+        footer: {
+          message: "Released under the MIT License.",
+          copyright: "Copyright © 2022-present, Giacomo Huang, MCI Studio",
+        },
+      },
+    },
+    ko: {
+      label: "한국어",
+      lang: "ko-KR",
+      title: "Vue Colorpicker",
+      description: "Vue3.0 기반 컬러피커 컴포넌트",
+      themeConfig: {
+        logo: { src: "/logo.png", width: 24, height: 24 },
+        nav: [
+          { text: "홈", link: "/ko/" },
+          { text: "가이드", link: "/ko/guides" },
+          { text: "예제", link: "/ko/examples" },
+        ],
+        sidebar: [
+          {
+            text: "가이드",
+            link: "/ko/guides",
+          },
+          {
+            text: "예제",
+            link: "/ko/examples",
+          },
+        ],
         socialLinks: [{ icon: "github", link: "https://github.com/giacomohuang/colorpicker/" }],
         footer: {
           message: "Released under the MIT License.",

@@ -2,11 +2,14 @@
 
 ## 概览
 
-- 支持3种CSS背景颜色模式：`solid`，`linear-gradient` 和 `radial-gradient`。
-- 支持颜色的不透明度（alpha）调整。
-- 支持梯度条控制，轻松拖动/添加/删除控制点。
-- 通过取色器可以快速从你的屏幕上提取任何颜色。（支持谷歌浏览器95版本以上）。
-- 支持实时预览。
+Vue Colorpicker 是一个功能强大的颜色选择组件，提供以下特性：
+
+- 三种 CSS 背景颜色模式：`solid`（纯色）、`linear-gradient`（线性渐变）和 `radial-gradient`（径向渐变）
+- 完整的 HSV 色彩空间支持，包含透明度控制
+- 交互式渐变控制，支持拖拽式颜色节点管理
+- 内置屏幕取色器功能（支持 Chrome 95+）
+- 实时预览并生成 CSS 代码
+- 响应式设计，提供三种尺寸选项
 
 ![screenshot01](/screenshot01.png)
 ![screenshot02](/screenshot02.png)
@@ -18,127 +21,128 @@
 npm i @mcistudio/vue-colorpicker
 ```
 
-## 如何使用
+## 使用方法
 
-- **全局注册**
+### 全局注册
 
 ```javascript
 import ColorPicker from "@mcistudio/vue-colorpicker";
 import "@mcistudio/vue-colorpicker/dist/style.css";
+
 createApp(App).use(ColorPicker).mount("#app");
 ```
 
-- **局部注册**
+### 局部注册
 
 ```vue
 <script setup>
 import ColorPicker from "@mcistudio/vue-colorpicker";
 import "@mcistudio/vue-colorpicker/dist/style.css";
+</script>
 
 <template>
-  <ColorPicker></ColorPicker>
-</template>;
-</script>
+  <ColorPicker v-model="color"></ColorPicker>
+</template>
 ```
 
-### Props 参数
+## Props 参数
 
-| 参数名  | 描述               | 数据类型 | 允许值                      | 默认值 | 是否必填 |
-| ------- | ------------------ | -------- | --------------------------- | ------ | -------- |
-| V-model | 绑定值             | JSON     | `<v-model>`                 |        | No       |
-| modebar | 是否显示模式选择条 | String   | show<br/>none               | show   | No       |
-| size    | 按钮尺寸           | String   | small<br/>medium<br />large | medium | No       |
+| 参数名  | 描述           | 类型   | 可选值                     | 默认值   | 是否必填 |
+| ------- | -------------- | ------ | -------------------------- | -------- | -------- |
+| v-model | 颜色值对象     | Object | 见下方 v-model 格式说明    | -        | 否       |
+| modebar | 模式栏显示状态 | String | 'show'、'none'             | 'show'   | 否       |
+| size    | 组件尺寸       | String | 'small'、'medium'、'large' | 'medium' | 否       |
 
-`<v-model>`
+### v-model 格式说明
 
-| 参数名    | 描述                                                               | 数据类型   | 允许值                              | 默认值                                                                                                                                                                          | 是否必填 |
-| --------- | ------------------------------------------------------------------ | ---------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- |
-| mode      | 模式                                                               | String     | solid<br />linear<br />radial<br /> | solid                                                                                                                                                                           | No       |
-| color     | 色值(rgba格式)，仅在solid模式中生效                                | String     | -                                   | \{ r: 0, g: 0, b: 0, a: 1 \}                                                                                                                                                    | No       |
-| hex       | 色值(hex格式)，仅在solid模式中生效，只读                           | String     | -                                   | -                                                                                                                                                                               | No       |
-| degree    | 渐变色角度，仅在linear-gradient模式中生效                          | Number     | -                                   | 90                                                                                                                                                                              | No       |
-| gradients | 渐变色值列表，仅在linear-gradient和radial-gradient模式中生效<br /> | JSON Array | -                                   | [<br />{<br />percent: 0, <br />color: { r: 255, g: 255, b: 255, a: 1 \}<br /> \}<br /> \{ <br />percent: 100, <br />color: \{ r: 0, g: 0, b: 0, a: 1 <br />\} <br /> \}<br />] | No       |
+| 属性名    | 描述                             | 类型   | 可选值                      | 默认值                                                                                                               | 是否必填 |
+| --------- | -------------------------------- | ------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------- | -------- |
+| mode      | 颜色模式                         | String | 'solid'、'linear'、'radial' | 'solid'                                                                                                              | 否       |
+| color     | RGBA 颜色对象（纯色模式）        | Object | \{ r, g, b, a \}            | \{ r: 0, g: 0, b: 0, a: 1 \}                                                                                         | 否       |
+| hex       | 十六进制颜色值（纯色模式，只读） | String | -                           | -                                                                                                                    | 否       |
+| degree    | 渐变角度（线性渐变模式）         | Number | 0-360                       | 90                                                                                                                   | 否       |
+| gradients | 渐变节点数组                     | Array  | 渐变节点对象数组            | [\{ percent: 0, color: \{ r: 255, g: 255, b: 255, a: 1 \}\}, \{ percent: 100, color: \{ r: 0, g: 0, b: 0, a: 1 \}\}] | 否       |
 
-### Events 事件
+## 事件
 
-| 事件名称     | 描述                                     | 返回参数    |
-| ------------ | ---------------------------------------- | ----------- |
-| colorChanged | 当颜色值、渐变色角度发生变化时触发本事件 | returnValue |
+| 事件名称     | 描述           | 参数       |
+| ------------ | -------------- | ---------- |
+| colorChanged | 颜色变化时触发 | 颜色值对象 |
 
-###### `returnValue` examples:
+### 返回值示例
 
-**Solid Mode**
+**纯色模式**
 
-```JSON
+```json
 {
-    "mode": "solid",
-    "color": {
+  "mode": "solid",
+  "color": {
+    "r": 0,
+    "g": 0,
+    "b": 0,
+    "a": 1
+  },
+  "hex": "#000000",
+  "css": "background-color:rgba(0,0,0,1)"
+}
+```
+
+**线性渐变模式**
+
+```json
+{
+  "mode": "linear",
+  "degree": 90,
+  "gradients": [
+    {
+      "percent": 0,
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 1
+      }
+    },
+    {
+      "percent": 100,
+      "color": {
         "r": 0,
         "g": 0,
         "b": 0,
         "a": 1
+      }
+    }
+  ],
+  "css": "background-image:linear-gradient(90deg,rgba(255,255,255,1) 0%,rgba(0,0,0,1) 100%)"
+}
+```
+
+**径向渐变模式**
+
+```json
+{
+  "mode": "radial",
+  "gradients": [
+    {
+      "percent": 0,
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 1
+      }
     },
-  	"hex":'#000000'
-    "css": "background-color:rgba(0,0,0,1)"
-}
-```
-
-**Linear Mode**
-
-```JSON
-{
-    "mode": "linear",
-    "degree": 90,
-    "color": [
-        {
-            "percent": 0,
-            "color": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 1
-            }
-        },
-        {
-            "percent": 100,
-            "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 1
-            }
-        }
-    ],
-    "css": "background-image:linear-gradient(90deg,rgba(255,255,255,1) 0%,rgba(0,0,0,1) 100%)"
-}
-```
-
-**Radial Mode**
-
-```JSON
-{
-    "mode": "radial",
-    "color": [
-        {
-            "percent": 0,
-            "color": {
-                "r": 255,
-                "g": 255,
-                "b": 255,
-                "a": 1
-            }
-        },
-        {
-            "percent": 100,
-            "color": {
-                "r": 0,
-                "g": 0,
-                "b": 0,
-                "a": 1
-            }
-        }
-    ],
-    "css": "background-image:radial-gradient(rgba(255,255,255,1) 0%,rgba(0,0,0,1) 100%)"
+    {
+      "percent": 100,
+      "color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 1
+      }
+    }
+  ],
+  "css": "background-image:radial-gradient(rgba(255,255,255,1) 0%,rgba(0,0,0,1) 100%)"
 }
 ```
 

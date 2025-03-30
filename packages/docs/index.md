@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Vue Colorpicker"
-  tagline: A colorpicker component based on Vue 3
+  tagline: A powerful and flexible color picker component for Vue 3
   actions:
     - theme: brand
       text: Guides
@@ -17,12 +17,12 @@ hero:
     width: 120
     height: 120
 features:
-  - title: Rich Configuration
-    details: Supports color mode (solid / linear / radial ), opacity and grandient control adjustment
-  - title: WYSIWYG
-    details: Supports real-time preview of color and gradient effects, what you see is what you get.
-  - title: EyeDropper
-    details: You can quickly pick any color from your screen with the eyedropper. （supports Google Chrome version 95 and above）
+  - title: Multiple Color Modes
+    details: Supports solid color, linear gradient and radial gradient with full control over color stops and angles
+  - title: Advanced Controls
+    details: Intuitive color selection with HSV color space, alpha channel control, and gradient stop management
+  - title: Modern Features
+    details: Built-in EyeDropper API support (Chrome 95+), real-time preview, and responsive design
 ---
 
 <style>

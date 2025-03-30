@@ -1,16 +1,26 @@
-a Vue3.x based colorpicker component.
+# Vue3 Color Picker
 
-[Guides & Examples](https://giacomohuang.github.io/colorpicker) | [文档和示例](https://giacomohuang.github.io/colorpicker/zh)
+A powerful and flexible color picker component for Vue 3.x applications.
 
-## Features
+[Documentation & Examples](https://giacomohuang.github.io/colorpicker) | [文档和示例](https://giacomohuang.github.io/colorpicker/zh)
 
-- Supports 3 CSS background color modes: `solid`, `linear-gradient` and `radial-gradient`.
-- Supports color opacity(alpha) adjustment.
-- Supports gradient bar control, easily drag/add/delete the control points.
-- The EyeDropper can quickly pick any color from your screen. （supports Google Chrome version 95+）
-- Supports live preview.
+## ✨ Features
 
-## Screenshots
+- **Multiple Color Modes**
+  - Solid color selection with HEX, RGB, and HSL formats
+  - Linear gradient with customizable angle and positions
+  - Radial gradient with adjustable center and radius
+- **Advanced Controls**
+  - Alpha channel support for transparency adjustment
+  - Interactive gradient bar with intuitive control points
+  - Drag, add, or delete gradient stops with ease
+  - Real-time color preview
+- **Modern Browser Features**
+  - EyeDropper tool for picking colors from anywhere on screen (Chrome 95+)
+  - Full keyboard navigation support
+  - Responsive design that works on both desktop and mobile
+
+## 🖼️ Screenshots
 
 <img width="283" alt="image" src="https://user-images.githubusercontent.com/20314549/180416571-b0dfcf42-805c-45e9-8ca0-cfd6d67e14fa.png">
 <img width="282" alt="image" src="https://user-images.githubusercontent.com/20314549/180416988-bb9ee230-8052-4ac0-ac40-9f4aad2814e7.png">
@@ -19,36 +29,65 @@ a Vue3.x based colorpicker component.
 <video src="https://user-images.githubusercontent.com/20314549/180185437-259e668f-03ec-45ba-bb5a-bf7bd99973e2.mov" type="video/mp4" style="object-fill:fill" autoplay loop controls="false">
 </video>
 
-## Installation
+## 📦 Installation
 
 ```bash
-npm i @mcistudio/vue-colorpicker
+# Using npm
+npm install @mcistudio/vue-colorpicker
+
+# Using yarn
+yarn add @mcistudio/vue-colorpicker
+
+# Using pnpm
+pnpm add @mcistudio/vue-colorpicker
 ```
 
-### How to Use
+## 🚀 Quick Start
 
-#### Global Registration
-
-main.js
+### Global Registration
 
 ```javascript
+import { createApp } from "vue";
+import App from "./App.vue";
 import ColorPicker from "@mcistudio/vue-colorpicker";
 import "@mcistudio/vue-colorpicker/style.css";
-createApp(App).use(ColorPicker).mount("#app");
+
+const app = createApp(App);
+app.use(ColorPicker);
+app.mount("#app");
 ```
 
-##### OR
-
-#### Local Registration
-
-HelloWorld.vue
+### Local Registration
 
 ```vue
 <script setup>
+import { ref } from "vue";
 import ColorPicker from "@mcistudio/vue-colorpicker";
+import "@mcistudio/vue-colorpicker/style.css";
+
+const color = ref({
+  mode: "solid",
+  color: {
+    r: 12,
+    g: 134,
+    b: 123,
+    a: 1,
+  },
+});
+</script>
 
 <template>
-  <ColorPicker></ColorPicker>
-</template>;
-</script>
+  <ColorPicker v-model="color" />
+</template>
 ```
+
+## 🌐 Browser Support
+
+- Chrome ≥ 95 (for EyeDropper feature)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## 📄 License
+
+MIT License © 2024

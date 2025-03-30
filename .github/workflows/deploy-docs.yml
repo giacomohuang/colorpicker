@@ -45,9 +45,9 @@ jobs:
         run: pnpm install
         continue-on-error: false
 
-      - name: Build colorpicker dependencies
-        run: pnpm build:deps
-        continue-on-error: false
+      # - name: Build colorpicker dependencies
+      #   run: pnpm build:deps
+      #   continue-on-error: false
 
       - name: Build docs
         run: pnpm build:docs
