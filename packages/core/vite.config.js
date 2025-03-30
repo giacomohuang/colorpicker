@@ -24,6 +24,10 @@ export default defineConfig(() => {
         fileName: (format) => `colorpicker.${format}.js`,
         formats: ['es', 'umd', 'cjs']
       },
+      watch: {
+        include: 'src/**/*',
+        exclude: 'node_modules/**/*'
+      },
       rollupOptions: {
         external: ['vue'],
         output: {
