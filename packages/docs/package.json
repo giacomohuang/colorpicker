@@ -10,6 +10,6 @@
     "vitepress": "^1.5.0"
   },
   "dependencies": {
-    "@mcistudio/vue-colorpicker": "2.3.0"
+    "@colorpicker/core": "workspace:*"
   }
 }
