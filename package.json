@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "demo": "pnpm build:deps && pnpm -F @colorpicker/demo dev",
+    "dev:core": "pnpm build:deps && pnpm -F @colorpicker/core dev",
     "dev:docs": "pnpm build:deps && pnpm -F @colorpicker/docs docs:dev",
     "build:docs": "pnpm build:deps && pnpm -F @colorpicker/docs docs:build",
     "dev:demo": "pnpm build:deps && pnpm -F @colorpicker/demo dev",

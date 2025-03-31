@@ -3,7 +3,6 @@
     <div class="cbtn" :class="[props.size, { active: isShowPanel }]" @click.stop="isShowPanel = !isShowPanel" ref="cbtnEl">
       <div class="cbtn-inner" :style="{ background: previewBackground }"></div>
     </div>
-
     <div class="panel" v-show="isShowPanel" ref="panelEl" @contextmenu.prevent="bindContext">
       <div class="active-mode-wrapper" :style="{ display: modebar }">
         <div title="solid" class="btn-active-mode solid" :class="{ gray: activeMode !== 'solid' }" @click.stop="changeMode('solid')"></div>
@@ -49,7 +48,7 @@ export default { name: 'vue-colorpicker' }
 </script>
 
 <script setup>
-import { ref, reactive, onMounted, nextTick, watch } from 'vue'
+import { ref, reactive, onMounted, nextTick, watch, onUnmounted } from 'vue'
 
 import Utils from './assets/js/Color'
 import maskImgUrl from './assets/img/optmask.png'
@@ -95,6 +94,8 @@ const previewBackground = ref('')
 const gradPreviewColor = ref('')
 const isDropperEnabled = ref(true)
 
+const mouse = reactive({ x: 0, y: 0 })
+
 const paletteColor = reactive(Utils.rgba2hsba(props.modelValue?.color || { r: 0, g: 0, b: 0, a: 1 }))
 const degree = ref(props.modelValue?.degree || 90)
 degree.value = degree.value < 0 ? 0 : degree.value
@@ -138,8 +139,18 @@ if ('EyeDropper' in window) {
   console.log('EyeDropper only supports Google Chrome version 95 and above')
 }
 
+const mousemove = (e) => {
+  mouse.x = e.clientX
+  mouse.y = e.clientY
+}
+
 onMounted(() => {
   changeMode(activeMode.value)
+  document.addEventListener('mousemove', mousemove, true)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('mousemove', mousemove, true)
 })
 
 watch(paletteColor, () => {
@@ -253,20 +264,6 @@ function getBounding(el) {
   return { top: top, left: left }
 }
 
-function getMousePos() {
-  let x = 0,
-    y = 0
-  let e = window.event
-  if (e.pageX) {
-    x = e.pageX
-    y = e.pageY
-  } else {
-    x = e.clientX + document.body.scrollLeft - document.body.clientLeft
-    y = e.clientY + document.body.scrollTop - document.body.clientTop
-  }
-  return { x: x, y: y }
-}
-
 function bindOutsideClick(e) {
   var elem = e.target
   if (isDragging) {
@@ -324,8 +321,7 @@ function delGradPicker() {
 
 function getGradPickerPos(el, index) {
   const elPos = getBounding(gradBarEl.value)
-  const mousePos = getMousePos()
-  let left = Math.max(-3, Math.min(barWidth - 12, mousePos.x - elPos.left - 6))
+  let left = Math.max(-3, Math.min(barWidth - 12, mouse.x - elPos.left - 6))
   el.style.left = left + 'px'
   gradColors.value[index].percent = Math.round(((left + 3) / (barWidth - 9)) * 100)
   activeGradPickerIndex.value = index
@@ -402,8 +398,7 @@ function getDegreePickerPos() {
   const r = 10
   const bar_r = 4
   const elPos = getBounding(degreeEl.value)
-  const mousePos = getMousePos()
-  const rad = Math.atan2(elPos.top + r - mousePos.y, mousePos.x - elPos.left - r)
+  const rad = Math.atan2(elPos.top + r - mouse.y, mouse.x - elPos.left - r)
   degreePickerEl.value.style.left = Math.cos(rad) * r + bar_r + 1 + 'px'
   degreePickerEl.value.style.top = -Math.sin(rad) * r + bar_r + 1 + 'px'
   let deg = 90 - Math.floor((rad * 180) / Math.PI)
@@ -429,9 +424,8 @@ function setDegreeHanderPos() {
 
 function getPalettePickerPos() {
   const elPos = getBounding(paletteEl.value)
-  const mousePos = getMousePos()
-  const left = Math.max(-6, Math.min(mousePos.x - elPos.left - 6, paletteWidth - 6))
-  const top = Math.max(-6, Math.min(mousePos.y - elPos.top - 6, paletteHeight - 6))
+  const left = Math.max(-6, Math.min(mouse.x - elPos.left - 6, paletteWidth - 6))
+  const top = Math.max(-6, Math.min(mouse.y - elPos.top - 6, paletteHeight - 6))
   palettePickerEl.value.style.left = left + 'px'
   palettePickerEl.value.style.top = top + 'px'
   paletteColor.s = Math.round((100 * (left + 6)) / paletteWidth)
@@ -440,8 +434,8 @@ function getPalettePickerPos() {
 
 function getHuePickerPos() {
   const elPos = getBounding(hueBarEl.value)
-  const mousePos = getMousePos()
-  const left = Math.max(-3, Math.min(mousePos.x - elPos.left - 6, barWidth - 12))
+
+  const left = Math.max(-3, Math.min(mouse.x - elPos.left - 6, barWidth - 12))
   huePickerEl.value.style.left = left + 'px'
   paletteColor.h = Math.round((360 * (left + 3)) / (barWidth - 9))
   const c = Utils.hsb2rgb({ h: paletteColor.h, s: 100, b: 100, a: paletteColor.a })
@@ -450,8 +444,7 @@ function getHuePickerPos() {
 
 function getOpacityPickerPos() {
   const elPos = getBounding(opactiyBarEl.value)
-  const mousePos = getMousePos()
-  const left = Math.max(-3, Math.min(barWidth - 12, mousePos.x - elPos.left - 6))
+  const left = Math.max(-3, Math.min(barWidth - 12, mouse.x - elPos.left - 6))
   opacityPickerEl.value.style.left = left + 'px'
   paletteColor.a = ((left + 3) / (barWidth - 9)).toFixed(2)
 }

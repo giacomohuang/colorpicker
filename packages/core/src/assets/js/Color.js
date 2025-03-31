@@ -77,6 +77,16 @@ const Utils = {
     return this.rgba2hsba(rgba)
   },
 
+  hex2hsba(hexa) {
+    const rgba = this.hex2rgba(hexa)
+    return this.rgba2hsba(rgba)
+  },
+
+  isHexColor(hex) {
+    // 支持 #fff #ffffff #000000 #00000000
+    return /^#([0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/.test(hex)
+  },
+
   rgba2hsba(rgba) {
     var hsba = { h: 0, s: 0, b: 0, a: rgba.a }
     var min = Math.min(rgba.r, rgba.g, rgba.b)
@@ -96,6 +106,7 @@ const Utils = {
     hsba.h = Math.round(hsba.h)
     hsba.s = Math.round(hsba.s)
     hsba.b = Math.round(hsba.b)
+    console.log(rgba.a, hsba.a)
     return hsba
   }
 }
