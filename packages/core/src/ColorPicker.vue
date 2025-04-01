@@ -96,7 +96,16 @@ const isDropperEnabled = ref(true)
 
 const mouse = reactive({ x: 0, y: 0 })
 
-const paletteColor = reactive(Utils.rgba2hsba(props.modelValue?.color || { r: 0, g: 0, b: 0, a: 1 }))
+let pc = null
+if (typeof props.modelValue?.color === 'string') {
+  pc = Utils.hex2hsba(props.modelValue.color)
+} else if (typeof props.modelValue?.color === 'object') {
+  pc = Utils.rgba2hsba(props.modelValue.color)
+} else {
+  pc = { r: 0, g: 0, b: 0, a: 1 }
+}
+
+const paletteColor = reactive(pc)
 const degree = ref(props.modelValue?.degree || 90)
 degree.value = degree.value < 0 ? 0 : degree.value
 
@@ -268,7 +277,7 @@ function bindOutsideClick(e) {
   var elem = e.target
   if (isDragging) {
     isDragging = false
-    return false
+    return
   }
   if (!panelEl.value.contains(elem) && !cbtnEl.value.contains(elem)) {
     isShowPanel.value = false

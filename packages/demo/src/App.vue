@@ -39,12 +39,7 @@ import '@colorpicker/core/dist/style.css'
 
 const color = ref({
   mode: 'solid',
-  color: {
-    r: 255,
-    g: 200,
-    b: 200,
-    a: 1
-  }
+  color: '#ff0000'
 })
 
 const setColor = () => {
